@@ -6,6 +6,9 @@
     // An array of relative input file paths. Globbing patterns supported
     "inputFiles": [
       "wwwroot/css/plugins.css",
+      "wwwroot/css/components.css",
+      "wwwroot/css/themes/default.css",
+      "wwwroot/css/custom.css",
       "wwwroot/css/site.css"
     ],
     "minify": {
@@ -14,16 +17,89 @@
     }
   },
   {
+    "outputFileName": "wwwroot/css/global.min.css",
+    // An array of relative input file paths. Globbing patterns supported
+    "inputFiles": [
+      "wwwroot/plugins/socicon/socicon.css",
+      "wwwroot/plugins/bootstrap-social/bootstrap-social.css",
+      "wwwroot/plugins/font-awesome/css/font-awesome.min.css",
+      "wwwroot/plugins/simple-line-icons/simple-line-icons.min.css",
+      "wwwroot/plugins/animate/animate.min.css",
+      "wwwroot/plugins/bootstrap/css/bootstrap.min.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/base.min.css",
+    "inputFiles": [
+      "wwwroot/plugins/revo-slider/css/settings.css",
+      "wwwroot/plugins/revo-slider/css/layers.css",
+      "wwwroot/plugins/revo-slider/css/navigation.css",
+      "wwwroot/plugins/cubeportfolio/css/cubeportfolio.min.css",
+      "wwwroot/plugins/owl-carousel/owl.carousel.css",
+      "wwwroot/plugins/owl-carousel/owl.theme.css",
+      "wwwroot/plugins/owl-carousel/owl.transitions.css",
+      "wwwroot/plugins/fancybox/jquery.fancybox.css",
+      "wwwroot/plugins/slider-for-bootstrap/css/slider.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/core.min.js",
+    "inputFiles": [
+      "wwwroot/plugins/jquery.min.js",
+      "wwwroot/plugins/jquery-migrate.min.js",
+      "wwwroot/plugins/bootstrap/js/bootstrap.min.js",
+      "wwwroot/plugins/jquery.easing.min.js",
+      "wwwroot/plugins/reveal-animate/wow.js",
+      "wwwroot/base/js/scripts/reveal-animate/reveal-animate.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
+      "wwwroot/js/components.js",
+      "wwwroot/js/components-shop.js",
+      "wwwroot/js/app.js",
       "wwwroot/js/site.js"
     ],
     // Optionally specify minification options
     "minify": {
       "enabled": true,
       "renameLocals": true
-    },
-    // Optinally generate .map file
-    "sourceMap": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/layout.min.js",
+    "inputFiles": [
+      "wwwroot/plugins/revo-slider/js/jquery.themepunch.tools.min.js",
+      "wwwroot/plugins/revo-slider/js/jquery.themepunch.revolution.min.js",
+      "wwwroot/plugins/revo-slider/js/extensions/revolution.extension.slideanims.min.js",
+      "wwwroot/plugins/revo-slider/js/extensions/revolution.extension.layeranimation.min.js",
+      "wwwroot/plugins/revo-slider/js/extensions/revolution.extension.navigation.min.js",
+      "wwwroot/plugins/revo-slider/js/extensions/revolution.extension.video.min.js",
+      "wwwroot/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js",
+      "wwwroot/plugins/owl-carousel/owl.carousel.min.js",
+      "wwwroot/plugins/counterup/jquery.waypoints.min.js",
+      "wwwroot/plugins/counterup/jquery.counterup.min.js",
+      "wwwroot/plugins/fancybox/jquery.fancybox.pack.js",
+      "wwwroot/plugins/slider-for-bootstrap/js/bootstrap-slider.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
   }
 ]

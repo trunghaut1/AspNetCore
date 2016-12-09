@@ -1,0 +1,58 @@
+﻿@model ProductListViewModel
+@{
+    ViewData["Title"] = "Sản phẩm";
+}
+<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
+    <div class="container">
+        <div class="c-page-title c-pull-left">
+            <h3 class="c-font-uppercase c-font-sbold">Danh sách sản phẩm</h3>
+            <h4 class="">Sách</h4>
+        </div>
+        <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
+            <li>
+                <a asp-action="List" asp-controller="Home" asp-route-id="">Loại</a>
+            </li>
+            <li>/</li>
+            <li>
+                <a asp-action="List" asp-controller="Home" asp-route-id="@ViewBag.CatID">@ViewBag.Cat</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container">
+    <div class="c-margin-t-20"></div>
+    @foreach (Product item in Model.Products)
+    {
+        <div class="row c-margin-b-40">
+            <div class="c-content-product-2 c-bg-white">
+                <div class="col-md-4">
+                    <div class="c-content-overlay">
+                        <div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">Sale</div>
+                        <div class="c-overlay-wrapper">
+                            <div class="c-overlay-content">
+                                <a asp-action="Product" asp-controller="Home" asp-route-id="@item.Id" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Xem</a>
+                            </div>
+                        </div>
+                        <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 230px; background-image: url(../../@item.Image);"></div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="c-info-list">
+                        <h3 class="c-title c-font-bold c-font-22 c-font-dark">
+                            <a class="c-theme-link" asp-action="Product" asp-controller="Home" asp-route-id="@item.Id">@item.Name</a>
+                        </h3>
+                        <p class="c-desc c-font-16 c-font-thin">@item.Describe.Substring(0, item.Describe.Length > 350 ? 350 : item.Describe.Length)...</p>
+                        <p class="c-price c-font-26 c-font-thin c-font-red">
+                            @string.Format("{0:C}", item.Price)
+                        </p>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-sm c-theme-btn c-btn-square c-btn-uppercase c-btn-bold">
+                            <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

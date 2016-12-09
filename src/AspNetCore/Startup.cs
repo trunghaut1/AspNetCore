@@ -64,6 +64,12 @@ namespace AspNetCore
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: null,
+                    template: "{controller=Home}/{action=List}/{id?}/page{page:int}");
+                routes.MapRoute(
+                    name: null,
+                    template: "{controller=Home}/{action=List}/page{page:int}");
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });

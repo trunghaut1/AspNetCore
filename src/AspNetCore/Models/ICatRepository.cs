@@ -7,6 +7,7 @@ namespace AspNetCore.Models
 {
     public interface ICatRepository
     {
-
+        IEnumerable<Cat> Cats { get; }
+        Cat GetById(int id);
     }
 }

@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /*********************************
 COMPONENTS 
 *********************************/
@@ -13,14 +13,14 @@ code {
   font-size: 28px;
   outline: none !important;
   opacity: 0.5;
-  filter: alphaopacity=50;
+  filter: alpha(opacity=50);
   -webkit-transition: back 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
   -o-transition: all 0.2s ease-out;
   -ms-transition: all 0.2s ease-out; }
   .close:hover {
     opacity: 0.8;
-    filter: alphaopacity=80;
+    filter: alpha(opacity=80);
     -webkit-transition: back 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
     -o-transition: all 0.2s ease-out;
@@ -6645,14 +6645,14 @@ label.control-label {
   transition: all 0.3s;
   color: #ffffff;
   opacity: 0.3;
-  filter: alphaopacity=30; }
+  filter: alpha(opacity=30); }
   .tparrows.circle.hidearrows {
     opacity: 0;
-    filter: alphaopacity=0; }
+    filter: alpha(opacity=0); }
   .tparrows.circle:hover {
     transition: all 0.3s;
     opacity: 1;
-    filter: alphaopacity=100; }
+    filter: alpha(opacity=100); }
 
 .tp-banner-container.c-arrow-dark .tparrows.circle {
   background-image: url(../img/content/line-icons/dark1.png); }
@@ -6979,51 +6979,60 @@ label.control-label {
   right: 10px;
   position: absolute; }
 
-.owl-theme .owl-controls {
+.owl-carousel .owl-controls {
   margin-top: 60px; }
-  .owl-theme .owl-controls .owl-page span {
+  .owl-carousel .owl-controls .owl-dot {
     width: 12px;
     height: 12px;
-    margin: 5px 7px; }
+    margin: 5px 7px;
+    display: inline-block;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%; }
 
-.owl-theme.owl-bordered {
+.owl-carousel.c-owl-nav-center .owl-controls {
+  text-align: center; }
+
+.owl-carousel.owl-bordered {
   margin-top: 30px; }
-  .owl-theme.owl-bordered .owl-controls {
+  .owl-carousel.owl-bordered .owl-controls {
     margin-top: 20px; }
-  .owl-theme.owl-bordered .owl-wrapper-outer {
+  .owl-carousel.owl-bordered .owl-wrapper-outer {
     border: 1px solid #eeeeee; }
-  .owl-theme.owl-bordered .owl-item {
+  .owl-carousel.owl-bordered .owl-item {
     border-right: 1px solid #eeeeee; }
-    .owl-theme.owl-bordered .owl-item:last-child {
+    .owl-carousel.owl-bordered .owl-item:last-child {
       border-right: 0; }
 
-.owl-theme.owl-reset-space:not(.owl-single):not(.owl-bordered) {
+.owl-carousel.owl-reset-space:not(.owl-single):not(.owl-bordered) {
   margin: 0;
   width: 100%; }
-  .owl-theme.owl-reset-space:not(.owl-single):not(.owl-bordered) .owl-wrapper .owl-item {
+  .owl-carousel.owl-reset-space:not(.owl-single):not(.owl-bordered) .owl-wrapper .owl-item {
     padding: 0; }
 
-.owl-theme.owl-small-space:not(.owl-single):not(.owl-bordered) {
+.owl-carousel.owl-small-space:not(.owl-single):not(.owl-bordered) {
   margin: 0;
   width: 100%; }
-  .owl-theme.owl-small-space:not(.owl-single):not(.owl-bordered) .owl-wrapper .owl-item {
+  .owl-carousel.owl-small-space:not(.owl-single):not(.owl-bordered) .owl-wrapper .owl-item {
     padding: 5px; }
 
 .owl-theme:not(.owl-single):not(.owl-bordered) {
   margin-left: -30px;
   width: calc(100% + 60px); }
-  .owl-theme:not(.owl-single):not(.owl-bordered) .owl-wrapper .owl-item {
+  .owl-theme:not(.owl-single):not(.owl-bordered) .owl-wrapper .owl-item, .owl-theme:not(.owl-single):not(.owl-bordered) .owl-stage-outer .owl-item {
     padding: 0 30px; }
 
 .owl-theme.owl-theme-white .owl-pagination .owl-page span {
   background: #ffffff;
   opacity: 0.5;
-  filter: alphaopacity=50; }
+  filter: alpha(opacity=50); }
 
 .owl-theme.owl-theme-white .owl-pagination .owl-page.active span {
   background: #ffffff;
   opacity: 1;
-  filter: alphaopacity=100; }
+  filter: alpha(opacity=100); }
 
 @media (max-width: 767px) {
   /* 767px */
@@ -7521,3 +7530,6 @@ Glyphicons Demo
 
 .ilightbox-holder.light .ilightbox-caption > h1, .ilightbox-holder.light .ilightbox-caption h2, .ilightbox-holder.light .ilightbox-caption h3, .ilightbox-holder.light .ilightbox-caption h4 {
   color: #000; }
+
+.wow {
+  opacity: 0; }
