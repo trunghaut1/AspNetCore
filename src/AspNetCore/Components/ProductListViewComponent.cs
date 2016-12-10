@@ -15,9 +15,8 @@ namespace AspNetCore.Components
         {
             this.repo = repo;
         }
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(Product value)
         {
-            //ViewBag.SelectedCategory = RouteData?.Values["category"];
             return View(repo.GetByNumber(4));
         }
     }

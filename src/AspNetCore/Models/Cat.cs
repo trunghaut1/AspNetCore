@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace AspNetCore.Models
@@ -13,6 +14,7 @@ namespace AspNetCore.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Product> Product { get; set; }
     }
 }

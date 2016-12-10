@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using AspNetCore.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace AspNetCore
 {
@@ -35,6 +36,8 @@ namespace AspNetCore
             services.AddScoped<IUserRepository, EFUserRepository>();
             services.AddScoped<ICatRepository, EFCatRepository>();
             services.AddScoped<IProductRepository, EFProductRepository>();
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IOrderRepository, EFOrderRepository>();
             services.AddMvc();
             services.AddMemoryCache();
@@ -65,13 +68,35 @@ namespace AspNetCore
             {
                 routes.MapRoute(
                     name: null,
-                    template: "{controller=Home}/{action=List}/{id?}/page{page:int}");
+                    template: "Cat/{id:int}/page{page:int}",
+                    defaults: new { controller = "Home", action = "List" }
+                );
                 routes.MapRoute(
                     name: null,
-                    template: "{controller=Home}/{action=List}/page{page:int}");
+                    template: "Cat/page{page:int}",
+                    defaults: new { controller = "Home", action = "List", page = 1 }
+                );
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    name: null,
+                    template: "Cat/{id:int}",
+                    defaults: new { controller = "Home", action = "List", page = 1 }
+                );
+                routes.MapRoute(
+                    name: "searchRoute",
+                    template: "Search/{search}/page{page:int}",
+                    defaults: new { controller = "Home", action = "Search" }
+                );
+                routes.MapRoute(
+                    name: null,
+                    template: "Search/{search}",
+                    defaults: new { controller = "Home", action = "Search", page = 1 }
+                );
+                routes.MapRoute(
+                    name: null,
+                    template: "Product/{id:int?}",
+                    defaults: new { controller = "Home", action = "Product"}
+                );
+                routes.MapRoute(name: null, template: "{controller=Home}/{action=Index}/{id:int?}");
             });
         }
     }

@@ -1,0 +1,32 @@
+﻿@model Cart
+
+<div id="cartSummary" class="c-cart-menu">
+    <div class="c-cart-menu-title">
+        <input type="hidden" id="cartTotalItem" value="@Model.Lines.Count()"/>
+        <p class="c-cart-menu-float-l c-font-sbold">@Model.Lines.Count() sản phẩm</p>
+        <p class="c-cart-menu-float-r c-theme-font c-font-sbold">@Model.ComputeTotalValue().ToString("c")</p>
+    </div>
+    <ul class="c-cart-menu-items">
+        @foreach (var item in Model.Lines)
+        {
+            <li>
+                <div class="c-cart-menu-close">
+                    <a onclick="removeFromCart(@item.Product.Id)" class="c-theme-link">×</a>
+                </div>
+                <img src="/@item.Product.Image" />
+                <div class="c-cart-menu-content">
+                    <p>
+                        @item.Quantity x
+                        <span class="c-item-price c-theme-font">@(((int)item.Product.Price).ToString("c"))</span>
+                    </p>
+                    <a asp-action="Product" asp-controller="Home" asp-route-id="@item.Product.Id" class="c-item-name c-font-sbold">@item.Product.Name</a>
+                </div>
+            </li>
+        }
+    </ul>
+    <div class="c-cart-menu-footer">
+        <a asp-action="Index" asp-controller="Cart" class="btn btn-md c-btn c-btn-square c-btn-grey-3 c-font-white c-font-bold c-center c-font-uppercase">Xem giỏ hàng</a>
+        <a href="shop-checkout.html" class="btn btn-md c-btn c-btn-square c-theme-btn c-font-white c-font-bold c-center c-font-uppercase">Thanh toán</a>
+    </div>
+</div>
+

@@ -55,13 +55,13 @@
                         </button>
                         <button class="c-cart-toggler" type="button">
                             <i class="icon-handbag"></i>
-                            <span class="c-cart-number c-theme-bg">2</span>
+                            <span id="cartNumber2" class="c-cart-number c-theme-bg"></span>
                         </button>
                     </div>
                     <!-- END: BRAND -->
                     <!-- BEGIN: QUICK SEARCH -->
-                    <form class="c-quick-search" action="#">
-                        <input type="text" name="query" placeholder="Nhập tên sách cần tìm..." value="" class="form-control" autocomplete="off">
+                    <form class="c-quick-search" asp-action="Search" asp-controller="Home" asp-route-page="1">
+                        <input type="text" name="search" placeholder="Nhập tên sách cần tìm..." value="" class="form-control" autocomplete="off">
                         <span class="c-theme-link">&times;</span>
                     </form>
                     <!-- END: QUICK SEARCH -->
@@ -80,44 +80,7 @@
                 </div>
                 <!-- BEGIN: LAYOUT/HEADERS/QUICK-CART -->
                 <!-- BEGIN: CART MENU -->
-                <div class="c-cart-menu">
-                    <div class="c-cart-menu-title">
-                        <p class="c-cart-menu-float-l c-font-sbold">2 item(s)</p>
-                        <p class="c-cart-menu-float-r c-theme-font c-font-sbold">$79.00</p>
-                    </div>
-                    <ul class="c-cart-menu-items">
-                        <li>
-                            <div class="c-cart-menu-close">
-                                <a href="#" class="c-theme-link">×</a>
-                            </div>
-                            <img src="assets/base/img/content/shop2/24.jpg" />
-                            <div class="c-cart-menu-content">
-                                <p>
-                                    1 x
-                                    <span class="c-item-price c-theme-font">$30</span>
-                                </p>
-                                <a href="shop-product-details-2.html" class="c-item-name c-font-sbold">Winter Coat</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="c-cart-menu-close">
-                                <a href="#" class="c-theme-link">×</a>
-                            </div>
-                            <img src="assets/base/img/content/shop2/12.jpg" />
-                            <div class="c-cart-menu-content">
-                                <p>
-                                    1 x
-                                    <span class="c-item-price c-theme-font">$30</span>
-                                </p>
-                                <a href="shop-product-details.html" class="c-item-name c-font-sbold">Sports Wear</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="c-cart-menu-footer">
-                        <a href="shop-cart.html" class="btn btn-md c-btn c-btn-square c-btn-grey-3 c-font-white c-font-bold c-center c-font-uppercase">View Cart</a>
-                        <a href="shop-checkout.html" class="btn btn-md c-btn c-btn-square c-theme-btn c-font-white c-font-bold c-center c-font-uppercase">Checkout</a>
-                    </div>
-                </div>
+                @await Component.InvokeAsync("CartSummary")
                 <!-- END: CART MENU -->
                 <!-- END: LAYOUT/HEADERS/QUICK-CART -->
             </div>
@@ -135,30 +98,28 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h3 class="c-font-24 c-font-sbold">Create An Account</h3>
-                    <p>Please fill in below form to create an account with us</p>
+                    <h3 class="c-font-24 c-font-sbold">Tạo tài khoản</h3>
+                    <p>Vui lòng điền đầy đủ thông tin bên dưới</p>
                     <form>
                         <div class="form-group">
                             <label for="signup-email" class="hide">Email</label>
                             <input type="email" class="form-control input-lg c-square" id="signup-email" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <label for="signup-username" class="hide">Username</label>
-                            <input type="email" class="form-control input-lg c-square" id="signup-username" placeholder="Username">
+                            <label for="signup-phone" class="hide">Số điện thoại</label>
+                            <input type="email" class="form-control input-lg c-square" id="signup-phone" placeholder="Số điện thoại">
                         </div>
                         <div class="form-group">
-                            <label for="signup-fullname" class="hide">Fullname</label>
-                            <input type="email" class="form-control input-lg c-square" id="signup-fullname" placeholder="Fullname">
+                            <label for="signup-fullname" class="hide">Tên đầy đủ</label>
+                            <input type="email" class="form-control input-lg c-square" id="signup-fullname" placeholder="Tên đầy đủ">
                         </div>
                         <div class="form-group">
-                            <label for="signup-country" class="hide">Country</label>
-                            <select class="form-control input-lg c-square" id="signup-country">
-                                <option value="1">Country</option>
-                            </select>
+                            <label for="signup-password" class="hide">Mật khẩu</label>
+                            <input type="email" class="form-control input-lg c-square" id="signup-password" placeholder="Mật khẩu">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn c-theme-btn btn-md c-btn-uppercase c-btn-bold c-btn-square c-btn-login">Signup</button>
-                            <a href="javascript:;" class="c-btn-forgot" data-toggle="modal" data-target="#login-form" data-dismiss="modal">Back To Login</a>
+                            <button type="submit" class="btn c-theme-btn btn-md c-btn-uppercase c-btn-bold c-btn-square c-btn-login">Đăng ký</button>
+                            <a href="javascript:;" class="c-btn-forgot" data-toggle="modal" data-target="#login-form" data-dismiss="modal">Trở lại đăng nhập</a>
                         </div>
                     </form>
                 </div>
@@ -176,16 +137,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h3 class="c-font-24 c-font-sbold">Good Afternoon!</h3>
-                    <p>Let's make today a great day!</p>
+                    <h3 class="c-font-24 c-font-sbold">Đăng nhập</h3>
                     <form>
                         <div class="form-group">
                             <label for="login-email" class="hide">Email</label>
                             <input type="email" class="form-control input-lg c-square" id="login-email" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <label for="login-password" class="hide">Password</label>
-                            <input type="password" class="form-control input-lg c-square" id="login-password" placeholder="Password">
+                            <label for="login-password" class="hide">Mật khẩu</label>
+                            <input type="password" class="form-control input-lg c-square" id="login-password" placeholder="Mật khẩu">
                         </div>
                         <div class="form-group">
                             <div class="c-checkbox">
@@ -193,41 +153,19 @@
                                 <label for="login-rememberme" class="c-font-thin c-font-17">
                                     <span></span>
                                     <span class="check"></span>
-                                    <span class="box"></span> Remember Me
+                                    <span class="box"></span> Ghi nhớ
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn c-theme-btn btn-md c-btn-uppercase c-btn-bold c-btn-square c-btn-login">Login</button>
-                            <a href="javascript:;" data-toggle="modal" data-target="#forget-password-form" data-dismiss="modal" class="c-btn-forgot">Forgot Your Password ?</a>
-                        </div>
-                        <div class="clearfix">
-                            <div class="c-content-divider c-divider-sm c-icon-bg c-bg-grey c-margin-b-20">
-                                <span>or signup with</span>
-                            </div>
-                            <ul class="c-content-list-adjusted">
-                                <li>
-                                    <a class="btn btn-block c-btn-square btn-social btn-twitter">
-                                        <i class="fa fa-twitter"></i> Twitter
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn btn-block c-btn-square btn-social btn-facebook">
-                                        <i class="fa fa-facebook"></i> Facebook
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn btn-block c-btn-square btn-social btn-google">
-                                        <i class="fa fa-google"></i> Google
-                                    </a>
-                                </li>
-                            </ul>
+                            <button type="submit" class="btn c-theme-btn btn-md c-btn-uppercase c-btn-bold c-btn-square c-btn-login">Đăng nhập</button>
+                            <a href="javascript:;" data-toggle="modal" data-target="#forget-password-form" data-dismiss="modal" class="c-btn-forgot">Quên mật khẩu?</a>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer c-no-border">
-                    <span class="c-text-account">Don't Have An Account Yet ?</span>
-                    <a href="javascript:;" data-toggle="modal" data-target="#signup-form" data-dismiss="modal" class="btn c-btn-dark-1 btn c-btn-uppercase c-btn-bold c-btn-slim c-btn-border-2x c-btn-square c-btn-signup">Signup!</a>
+                    <span class="c-text-account">Chưa có tài khoản?</span>
+                    <a href="javascript:;" data-toggle="modal" data-target="#signup-form" data-dismiss="modal" class="btn c-btn-dark-1 btn c-btn-uppercase c-btn-bold c-btn-slim c-btn-border-2x c-btn-square c-btn-signup">Đăng ký!</a>
                 </div>
             </div>
         </div>
@@ -242,41 +180,7 @@
     <!-- END: PAGE CONTAINER -->
     <!-- BEGIN: LAYOUT/FOOTERS/FOOTER-2 -->
     <a name="footer"></a>
-    <footer class="c-layout-footer c-layout-footer-1">
-        <div class="c-postfooter">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <p class="c-copyright c-font-oswald c-font-14"> Copyright &copy; JANGO Inc. </p>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <ul class="c-socials">
-                            <li>
-                                <a href="#">
-                                    <i class="icon-social-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-social-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-social-youtube"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-social-dribbble"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @await Component.InvokeAsync("Footer")
     <!-- END: LAYOUT/FOOTERS/FOOTER-2 -->
     <!-- BEGIN: LAYOUT/FOOTERS/GO2TOP -->
     <div class="c-layout-go2top">
@@ -304,6 +208,7 @@
     <!-- END: THEME SCRIPTS -->
     <!-- BEGIN: PAGE SCRIPTS -->
     @RenderSection("scripts", required: false)
+    <script src="~/js/site.js" type="text/javascript"></script>
     <!-- END: PAGE SCRIPTS -->
     <!-- END: LAYOUT/BASE/BOTTOM -->
 </body>

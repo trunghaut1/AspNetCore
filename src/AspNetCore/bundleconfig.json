@@ -71,8 +71,7 @@
     "inputFiles": [
       "wwwroot/js/components.js",
       "wwwroot/js/components-shop.js",
-      "wwwroot/js/app.js",
-      "wwwroot/js/site.js"
+      "wwwroot/js/app.js"
     ],
     // Optionally specify minification options
     "minify": {

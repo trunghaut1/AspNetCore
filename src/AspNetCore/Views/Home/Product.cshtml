@@ -10,11 +10,11 @@
         </div>
         <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
             <li>
-                <a asp-action="List" asp-controller="Home">Loại</a>
+                <a asp-action="List" asp-controller="Home" asp-route-id="" asp-route-page="1">Loại</a>
             </li>
             <li>/</li>
             <li>
-                <a asp-action="List" asp-controller="Home" asp-route-id="@Model.CatId">@Model.Cat?.Name</a>
+                <a asp-action="List" asp-controller="Home" asp-route-id="@Model.CatId" asp-route-page="1">@Model.Cat?.Name</a>
             </li>
         </ul>
     </div>
@@ -62,7 +62,7 @@
                                 <div class="col-sm-5 col-xs-12">
                                     <div class="c-input-group c-spinner">
                                         <p class="c-product-meta-label c-product-margin-2 c-font-uppercase c-font-bold">Số lượng:</p>
-                                        <input type="text" class="form-control c-item-1" value="1">
+                                        <input type="text" id="cartQuantity" class="form-control c-item-1" value="1" min="1">
                                         <div class="c-input-group-btn-vertical">
                                             <button class="btn btn-default" type="button" data_input="c-item-1">
                                                 <i class="fa fa-caret-up"></i>
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-xs-12 c-margin-t-20">
-                                    <button class="btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">Thêm vào giỏ</button>
+                                    <button onclick="addToCart(@Model.Id,$('#cartQuantity').val())" class="btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">Thêm vào giỏ</button>
                                 </div>
                             </div>
                         </div>

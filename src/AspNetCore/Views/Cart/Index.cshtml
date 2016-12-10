@@ -1,0 +1,107 @@
+﻿@model Cart
+<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
+    <div class="container">
+        <div class="c-page-title c-pull-left">
+            <h3 class="c-font-uppercase c-font-sbold">Giỏ hàng</h3>
+            <h4 class="">BookShop</h4>
+        </div>
+        <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
+            <li>
+                <a asp-action="Index" asp-controller="Cart">Giỏ hàng</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+<!-- BEGIN: CONTENT/SHOPS/SHOP-CART-1 -->
+<div class="c-content-box c-size-lg">
+    <div class="container">
+        <div class="c-shop-cart-page-1">
+            <div class="row c-cart-table-title">
+                <div class="col-md-2 c-cart-image">
+                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Ảnh</h3>
+                </div>
+                <div class="col-md-4 c-cart-desc">
+                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Tên</h3>
+                </div>
+                <div class="col-md-1 c-cart-ref">
+                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Mã</h3>
+                </div>
+                <div class="col-md-1 c-cart-qty">
+                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Số lượng</h3>
+                </div>
+                <div class="col-md-2 c-cart-price">
+                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Giá</h3>
+                </div>
+                <div class="col-md-1 c-cart-total">
+                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Tổng</h3>
+                </div>
+                <div class="col-md-1 c-cart-remove"></div>
+            </div>
+            <!-- BEGIN: SHOPPING CART ITEM ROW -->
+                @foreach (var item in Model.Lines)
+            {
+                <div class="row c-cart-table-row">
+                        <h2 class="c-font-uppercase c-font-bold c-theme-bg c-font-white c-cart-item-title c-cart-item-first">@item.Product.Name</h2>
+                        <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
+                            <img src="@item.Product.Image" />
+                        </div>
+                        <div class="col-md-4 col-sm-9 col-xs-7 c-cart-desc">
+                            <h3>
+                                <a asp-action="Product" asp-controller="Home" asp-route-id="@item.Product.Id" class="c-font-bold c-theme-link c-font-22 c-font-dark">@item.Product.Name</a>
+                            </h3>
+                        </div>
+                        <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref">
+                            <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Mã</p>
+                            <p>@item.Product.Id</p>
+                        </div>
+                        <div class="col-md-1 col-sm-3 col-xs-6 c-cart-qty">
+                            <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Số lượng</p>
+                            <div class="c-input-group c-spinner">
+                                <input name="cartQuantity-@item.Product.Id" type="text" class="form-control c-item-@item.Product.Id" value="@item.Quantity">
+                                <div class="c-input-group-btn-vertical">
+                                    <button onclick="addToCart(@item.Product.Id,1)" class="btn btn-default" type="button" data_input="c-item-@item.Product.Id">
+                                        <i class="fa fa-caret-up"></i>
+                                    </button>
+                                    <button onclick="downCart(@item.Product.Id)" class="btn btn-default" type="button" data_input="c-item-@item.Product.Id">
+                                        <i class="fa fa-caret-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                            <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Giá</p>
+                            <p class="c-cart-price c-font-bold">@(((int)item.Product.Price).ToString("c"))</p>
+                        </div>
+                        <div class="col-md-1 col-sm-3 col-xs-6 c-cart-total">
+                            <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Tổng</p>
+                            <p class="c-cart-price c-font-bold">@(((int)(item.Product.Price * item.Quantity)).ToString("c"))</p>
+                        </div>
+                        <div class="col-md-1 col-sm-12 c-cart-remove">
+                            <a onclick="removeFromCart(@item.Product.Id)" class="c-theme-link c-cart-remove-desktop">×</a>
+                            <a onclick="removeFromCart(@item.Product.Id)" class="c-cart-remove-mobile btn c-btn c-btn-md c-btn-square c-btn-red c-btn-border-1x c-font-uppercase">Xóa khỏi giỏ</a>
+                        </div>
+                    </div>
+            }
+            <!-- END: SHOPPING CART ITEM ROW -->
+            <!-- BEGIN: SUBTOTAL ITEM ROW -->
+            <div class="row">
+                <div class="c-cart-subtotal-row c-margin-t-20">
+                    <div class="col-md-2 col-md-offset-8 col-sm-6 col-xs-6 c-cart-subtotal-border">
+                        <h3 class="c-font-uppercase c-font-bold c-right c-font-16 c-font-grey-2">Tổng đơn hàng</h3>
+                    </div>
+                    <div class="col-md-2 col-sm-6 col-xs-6 c-cart-subtotal-border">
+                        <h3 class="c-font-bold c-font-16">@Model.ComputeTotalValue().ToString("c")</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- END: SUBTOTAL ITEM ROW -->
+            <div class="c-cart-buttons">
+                <a asp-action="List" asp-controller="Home" class="btn c-btn btn-lg c-btn-red c-btn-square c-font-white c-font-bold c-font-uppercase c-cart-float-l">Tiếp tục mua hàng</a>
+                <a asp-action="Index" asp-controller="Checkout" class="btn c-btn btn-lg c-theme-btn c-btn-square c-font-white c-font-bold c-font-uppercase c-cart-float-r">Thanh toán</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END: CONTENT/SHOPS/SHOP-CART-1 -->

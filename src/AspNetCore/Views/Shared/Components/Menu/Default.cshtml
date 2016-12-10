@@ -6,7 +6,7 @@
     </a>
 </li>
 <li class="c-menu-type-classic">
-    <a asp-action="List" asp-controller="Home" asp-route-id="" class="c-link dropdown-toggle">
+    <a asp-action="List" asp-controller="Home" asp-route-page="1" asp-route-id="" class="c-link dropdown-toggle">
         Loại sách
         <span class="c-arrow c-toggler"></span>
     </a>
@@ -14,7 +14,7 @@
         @foreach (Cat item in Model)
         {
             <li class="dropdown-submenu">
-                <a asp-action="List" asp-controller="Home" asp-route-id="@item.Id">
+                <a asp-action="List" asp-controller="Home" asp-route-id="@item.Id" asp-route-page="1">
                     @item.Name
                     <span class="c-arrow c-toggler"></span>
                 </a>
@@ -33,9 +33,9 @@
     </a>
 </li>
 <li class="c-cart-toggler-wrapper">
-    <a href="#" class="c-btn-icon c-cart-toggler">
+    <a asp-action="Index" asp-controller="Cart" class="c-btn-icon c-cart-toggler">
         <i class="icon-handbag c-cart-icon"></i>
-        <span class="c-cart-number c-theme-bg">2</span>
+        <span id="cartNumber" class="c-cart-number c-theme-bg">@ViewBag.cartNumber</span>
     </a>
 </li>
 <li>

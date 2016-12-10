@@ -2,3 +2,9 @@
     font-family : 'Segoe UI', sans-serif;
     font-weight: unset;
 }
+.margin-right-5 {
+    margin-right: 5px;
+}
+.c-layout-header .c-cart-menu .c-cart-menu-items {
+    max-height: 400px;
+}

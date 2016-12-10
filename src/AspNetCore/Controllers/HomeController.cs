@@ -11,7 +11,7 @@ namespace AspNetCore.Controllers
     {
         private IProductRepository productRepo;
         private ICatRepository catRepo;
-        public int pageSize = 8;
+        public int pageSize = 5;
 
         public HomeController(IProductRepository productRepo, ICatRepository catRepo)
         {
@@ -44,6 +44,11 @@ namespace AspNetCore.Controllers
             {
                 return View(productRepo.GetPage(pageSize, page));
             }
+        }
+        public IActionResult Search(string search, int page = 1)
+        {
+            ViewBag.search = search;
+            return View(productRepo.Search(search, pageSize, page));
         }
 
         public IActionResult Contact()

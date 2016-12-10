@@ -1,4 +1,5 @@
-﻿using AspNetCore.Models;
+﻿using AspNetCore.Infrastructure;
+using AspNetCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,13 @@ namespace AspNetCore.Components
         }
         public IViewComponentResult Invoke()
         {
-            //ViewBag.SelectedCategory = RouteData?.Values["category"];
+            ViewBag.cartNumber = GetCart().Lines.Count();
             return View(repo.Cats);
+        }
+        private Cart GetCart()
+        {
+            Cart cart = HttpContext.Session.GetJson<Cart>("Cart") ?? new Cart();
+            return cart;
         }
     }
 }

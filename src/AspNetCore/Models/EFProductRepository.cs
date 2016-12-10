@@ -54,5 +54,20 @@ namespace AspNetCore.Models
                 }
             };
         }
+        public ProductListViewModel Search(string search, int pageSize, int page)
+        {
+            IEnumerable<Product> pro = db.Product.Where(o => o.Name.Contains(search)).OrderBy(o => o.Id)
+                .Skip((page - 1) * pageSize).Take(pageSize);
+            return new ProductListViewModel
+            {
+                Products = pro,
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = pageSize,
+                    TotalItems = db.Product.Where(o => o.Name.Contains(search)).Count()
+                }
+            };
+        }
     }
 }

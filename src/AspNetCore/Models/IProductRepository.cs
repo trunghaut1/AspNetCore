@@ -13,5 +13,6 @@ namespace AspNetCore.Models
         Product GetById(int id);
         ProductListViewModel GetByCat(int id, int pageSize, int page);
         ProductListViewModel GetPage(int pageSize, int page);
+        ProductListViewModel Search(string search, int pageSize, int page);
     }
 }

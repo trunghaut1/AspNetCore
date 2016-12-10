@@ -70,7 +70,7 @@
                             <div class="c-content c-content-overlay">
                                 <div class="c-overlay-wrapper c-overlay-padding">
                                     <div class="c-overlay-content">
-                                        <a asp-action="List" asp-controller="Home" asp-route-id="2" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Văn học</a>
+                                        <a asp-action="List" asp-controller="Home" asp-route-id="2" asp-route-page="1" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Văn học</a>
                                     </div>
                                 </div>
                                 <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 270px; background-image: url(../../img/content/shop2/67.jpg);"></div>
@@ -81,7 +81,7 @@
                             <div class="c-content c-content-overlay">
                                 <div class="c-overlay-wrapper c-overlay-padding">
                                     <div class="c-overlay-content">
-                                        <a asp-action="List" asp-controller="Home" asp-route-id="5" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Kinh tế</a>
+                                        <a asp-action="List" asp-controller="Home" asp-route-id="5" asp-route-page="1" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Kinh tế</a>
                                     </div>
                                 </div>
                                 <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 270px; background-image: url(../../img/content/shop2/85.jpg);"></div>
@@ -92,7 +92,7 @@
                             <div class="c-content c-content-overlay">
                                 <div class="c-overlay-wrapper c-overlay-padding">
                                     <div class="c-overlay-content">
-                                        <a asp-action="List" asp-controller="Home" asp-route-id="1" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Truyện</a>
+                                        <a asp-action="List" asp-controller="Home" asp-route-id="1" asp-route-page="1" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Truyện</a>
                                     </div>
                                 </div>
                                 <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 270px; background-image: url(../../img/content/shop2/63.jpg);"></div>
@@ -132,10 +132,10 @@
                             </p>
                         </div>
                         <div class="btn-group btn-group-justified" role="group">
-                            <div class="btn-group c-border-left c-border-top" role="group">
-                                <a href="shop-cart.html" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">Thêm vào giỏ</a>
+                                <div class="btn-group c-border-left c-border-top" role="group">
+                                    <a onclick="addToCart(@item.Id,1)" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">Thêm vào giỏ</a>
+                                </div>
                             </div>
-                        </div>
                     </div>
                 </div>
 

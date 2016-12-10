@@ -1,0 +1,24 @@
+﻿@model ProductListViewModel
+@{
+    ViewData["Title"] = "Kết quả tìm kiếm";
+}
+<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
+    <div class="container">
+        <div class="c-page-title c-pull-left">
+            <h3 class="c-font-uppercase c-font-sbold">Kết quả tìm kiếm</h3>
+            <h4 class="">Sách</h4>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="c-margin-t-20"></div>
+    @foreach (Product item in Model.Products)
+    {
+        @Html.Partial("ProductListTreePartial", item)
+    }
+</div>
+<div class="container c-margin-b-40 c-center">
+    <ul page-model="@Model.PagingInfo" page-action="Search" page-classes-enabled="true"
+        page-class-selected="c-active" page-url-search="@ViewBag.search"
+        class="c-content-pagination c-theme"></ul>
+</div>
