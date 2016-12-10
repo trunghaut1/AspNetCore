@@ -1,0 +1,103 @@
+﻿@model Order
+@{ 
+    ViewData["Title"] = "Thanh toán";
+    Cart cart = (Cart)ViewBag.cart;
+}
+<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
+    <div class="container">
+        <div class="c-page-title c-pull-left">
+            <h3 class="c-font-uppercase c-font-sbold">Thanh toán</h3>
+            <h4 class="">Thông tin đơn hàng</h4>
+        </div>
+        <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
+            <li>
+                <a asp-action="Index" asp-controller="Cart">Giỏ hàng</a>
+            </li>
+            <li>/</li>
+            <li><a asp-action="Checkout" asp-controller="Order">Thanh toán</a></li>
+        </ul>
+    </div>
+</div>
+<!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+<!-- BEGIN: PAGE CONTENT -->
+<div class="c-content-box c-size-lg">
+    <div class="container">
+        <form class="c-shop-form-1" asp-action="Checkout" asp-controller="Order" method="post">
+            <div class="row">
+                <!-- BEGIN: ADDRESS FORM -->
+                <div class="col-md-7 c-padding-20">
+                    <!-- BEGIN: BILLING ADDRESS -->
+                    <h3 class="c-font-bold c-font-uppercase c-font-24">Thông tin đơn hàng</h3>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Tên đầy đủ</label>
+                            <input type="text" class="form-control c-square c-theme" placeholder="Tên đầy đủ">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label asp-for="Address" class="control-label">Địa chỉ</label>
+                            <input asp-for="Address" type="text" class="form-control c-square c-theme" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Điện thoại</label>
+                            <input type="text" class="form-control c-square c-theme" placeholder="Điện thoại">
+                        </div>
+                    </div>
+                    <!-- BILLING ADDRESS -->
+                </div>
+                <!-- END: ADDRESS FORM -->
+                <!-- BEGIN: ORDER FORM -->
+                <div class="col-md-5">
+                    <div class="c-content-bar-1 c-align-left c-bordered c-theme-border c-shadow">
+                        <h1 class="c-font-bold c-font-uppercase c-font-24">Chi tiết đơn hàng</h1>
+                        <ul class="c-order list-unstyled">
+                            <li class="row c-margin-b-15">
+                                <div class="col-md-6 c-font-20">
+                                    <h2>Sản phẩm</h2>
+                                </div>
+                                <div class="col-md-6 c-font-20">
+                                    <h2>Tổng cộng</h2>
+                                </div>
+                            </li>
+                            <li class="row c-border-bottom"></li>
+                            @foreach (var item in cart.Lines)
+                            {
+                                <li class="row c-margin-b-15 c-margin-t-15">
+                                    <div class="col-md-6 c-font-20">
+                                        <a href="shop-product-details.html" class="c-theme-link">@item.Product.Name x @item.Quantity</a>
+                                    </div>
+                                    <div class="col-md-6 c-font-20">
+                                        <p class="">@(((int)(item.Quantity * item.Product.Price)).ToString("c"))</p>
+                                    </div>
+                                </li>
+                            }
+                            <li class="row c-border-top c-margin-b-15"></li>
+                            <li class="row c-margin-b-15 c-margin-t-15">
+                                <div class="col-md-6 c-font-20">
+                                    <p class="c-font-30">Tổng</p>
+                                </div>
+                                <div class="col-md-6 c-font-20">
+                                    <p class="c-font-bold c-font-30">
+                                        <span class="c-shipping-total">@cart.ComputeTotalValue().ToString("c")</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="row">
+                                <div class="form-group col-md-12" role="group">
+                                    <button type="submit" class="btn btn-lg c-theme-btn c-btn-square c-btn-uppercase c-btn-bold">Đặt hàng</button>
+                                    <a asp-action="Index" asp-controller="Cart" class="btn btn-lg btn-default c-btn-square c-btn-uppercase c-btn-bold">Hủy</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- END: ORDER FORM -->
+            </div>
+        </form>
+    </div>
+</div>
+<!-- END: PAGE CONTENT -->

@@ -1,0 +1,85 @@
+﻿@model OrderListViewModel
+@{ 
+    ViewData["Title"] = "Tài khoản";
+}
+<!-- BEGIN: PAGE CONTAINER -->
+    <!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+    <div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
+        <div class="container">
+            <div class="c-page-title c-pull-left">
+                <h3 class="c-font-uppercase c-font-sbold">Quản lý tài khoản</h3>
+            </div>
+            <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
+                <li>
+                    <a asp-action="Index" asp-controller="Account">Quản lý tài khoản</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+    <div class="container">
+        @Html.Partial("AccountMenuPartial")
+        <div class="c-layout-sidebar-content ">
+            <!-- BEGIN: PAGE CONTENT -->
+            <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
+            <div class="c-content-title-1">
+                <h3 class="c-font-uppercase c-font-bold">Lịch sử đơn hàng</h3>
+            </div>
+            <div class="row c-margin-b-40 c-order-history-2">
+                <div class="row c-cart-table-title">
+                    <div class="col-md-2 c-cart-image">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Ảnh</h3>
+                    </div>
+                    <div class="col-md-1 c-cart-ref">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Đơn hàng</h3>
+                    </div>
+                    <div class="col-md-5 c-cart-desc">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Tên</h3>
+                    </div>
+                    <div class="col-md-2 c-cart-price">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Giá</h3>
+                    </div>
+                    <div class="col-md-2 c-cart-qty">
+                        <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Ngày</h3>
+                    </div>
+                </div>
+                <!-- BEGIN: ORDER HISTORY ITEM ROW -->
+                @foreach (var item in Model.OrderDetails)
+                {
+                    <div class="row c-cart-table-row">
+                        <h2 class="c-font-uppercase c-font-bold c-theme-bg c-font-white c-cart-item-title c-cart-item-first">@item.Product.Name</h2>
+                        <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
+                            <img src="/@item.Product.Image" />
+                        </div>
+                        <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref">
+                            <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Đơn hàng</p>
+                            <p>@item.OrderId</p>
+                        </div>
+                        <div class="col-md-5 col-sm-6 col-xs-6 c-cart-desc">
+                            <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Tên</p>
+                            <p>
+                                <a asp-action="Product" asp-controller="Home" asp-route-id="@item.ProductId" class="c-font-bold c-theme-link c-font-dark">@item.Product.Name</a>
+                            </p>
+                        </div>
+                        <div class="clearfix col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                            <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Giá</p>
+                            <p class="c-cart-price c-font-bold">@(((int)item.Product.Price).ToString("c"))</p>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty">
+                            <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Ngày</p>
+                            <p>@item.Order.Date</p>
+                        </div>
+                    </div>
+                }
+                <!-- END: ORDER HISTORY ITEM ROW -->
+            </div>
+            <!-- END: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
+            <!-- END: PAGE CONTENT -->
+        </div>
+    </div>
+<!-- END: PAGE CONTAINER -->
+<div class="container c-margin-b-40 c-center">
+    <ul page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+        page-class-selected="c-active"
+        class="c-content-pagination c-theme"></ul>
+</div>

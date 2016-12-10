@@ -1,4 +1,7 @@
 ﻿@model Cart
+@{ 
+    ViewData["Title"] = "Giỏ hàng";
+}
 <!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
 <div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
     <div class="container">
@@ -99,7 +102,7 @@
             <!-- END: SUBTOTAL ITEM ROW -->
             <div class="c-cart-buttons">
                 <a asp-action="List" asp-controller="Home" class="btn c-btn btn-lg c-btn-red c-btn-square c-font-white c-font-bold c-font-uppercase c-cart-float-l">Tiếp tục mua hàng</a>
-                <a asp-action="Index" asp-controller="Checkout" class="btn c-btn btn-lg c-theme-btn c-btn-square c-font-white c-font-bold c-font-uppercase c-cart-float-r">Thanh toán</a>
+                <a asp-action="Checkout" asp-controller="Order" class="btn c-btn btn-lg c-theme-btn c-btn-square c-font-white c-font-bold c-font-uppercase c-cart-float-r">Thanh toán</a>
             </div>
         </div>
     </div>

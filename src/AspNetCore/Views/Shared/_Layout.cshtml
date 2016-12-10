@@ -128,54 +128,53 @@
     </div>
     <!-- END: CONTENT/USER/SIGNUP-FORM -->
     <!-- BEGIN: CONTENT/USER/LOGIN-FORM -->
-    <div class="modal fade c-content-login-form" id="login-form" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content c-square">
-                <div class="modal-header c-no-border">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h3 class="c-font-24 c-font-sbold">Đăng nhập</h3>
-                    <form>
-                        <div class="form-group">
-                            <label for="login-email" class="hide">Email</label>
-                            <input type="email" class="form-control input-lg c-square" id="login-email" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="login-password" class="hide">Mật khẩu</label>
-                            <input type="password" class="form-control input-lg c-square" id="login-password" placeholder="Mật khẩu">
-                        </div>
-                        <div class="form-group">
-                            <div class="c-checkbox">
-                                <input type="checkbox" id="login-rememberme" class="c-check">
-                                <label for="login-rememberme" class="c-font-thin c-font-17">
-                                    <span></span>
-                                    <span class="check"></span>
-                                    <span class="box"></span> Ghi nhớ
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn c-theme-btn btn-md c-btn-uppercase c-btn-bold c-btn-square c-btn-login">Đăng nhập</button>
-                            <a href="javascript:;" data-toggle="modal" data-target="#forget-password-form" data-dismiss="modal" class="c-btn-forgot">Quên mật khẩu?</a>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer c-no-border">
-                    <span class="c-text-account">Chưa có tài khoản?</span>
-                    <a href="javascript:;" data-toggle="modal" data-target="#signup-form" data-dismiss="modal" class="btn c-btn-dark-1 btn c-btn-uppercase c-btn-bold c-btn-slim c-btn-border-2x c-btn-square c-btn-signup">Đăng ký!</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    @await Component.InvokeAsync("Login")
     <!-- END: CONTENT/USER/LOGIN-FORM -->
     <!-- BEGIN: PAGE CONTAINER -->
     <div class="c-layout-page">
         <!-- BEGIN: PAGE CONTENT -->
         @RenderBody()
         <!-- END: PAGE CONTENT -->
+        <!-- BEGIN: CONTENT/MISC/COOKIES-3 -->
+        @if (TempData["Error"] != null)
+        {
+            <div class="c-cookies-bar c-cookies-bar-2 c-cookies-bar-bottom c-border-thick c-border-red c-bg-dark wow animated fadeInUp" data-wow-delay="1s">
+                <div class="c-cookies-bar-container">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="c-cookies-bar-content c-font-white">
+                                @TempData["Error"]
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="c-cookies-bar-btn">
+                                <a class="c-cookies-bar-close btn c-btn-red c-btn-square c-btn-bold" href="javascript:;">OK!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="c-cookies-bar c-cookies-bar-2 c-cookies-bar-bottom c-theme-bg c-rounded wow animated fadeInUp" data-wow-delay="1s">
+                <div class="c-cookies-bar-container">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="c-cookies-bar-content c-font-white">
+                                @TempData["Success"]
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="c-cookies-bar-btn">
+                                <a class="c-cookies-bar-close btn c-btn-white c-btn-square c-btn-bold" href="javascript:;">OK!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- END: CONTENT/MISC/COOKIES-3 -->
     </div>
     <!-- END: PAGE CONTAINER -->
     <!-- BEGIN: LAYOUT/FOOTERS/FOOTER-2 -->

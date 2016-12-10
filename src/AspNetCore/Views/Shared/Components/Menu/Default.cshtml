@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Cat>
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Cat>
 <li>
     <a href="~/" class="c-active c-link">
         Trang chủ
@@ -38,8 +39,24 @@
         <span id="cartNumber" class="c-cart-number c-theme-bg">@ViewBag.cartNumber</span>
     </a>
 </li>
-<li>
-    <a href="javascript:;" data-toggle="modal" data-target="#login-form" class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-white c-btn-circle c-btn-uppercase c-btn-sbold">
-        <i class="icon-user"></i> Đăng nhập
-    </a>
-</li>
+@if (User.Identity.IsAuthenticated)
+{
+    <li>
+        <a asp-action="Index" asp-controller="Account" asp-route-page="1" class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-white c-btn-circle c-btn-uppercase c-btn-sbold">
+            <i class="icon-user"></i> Tài khoản
+        </a>
+    </li>
+    <li>
+        <a asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.RouteUrl(ViewContext.RouteData.Values)" class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-white c-btn-circle c-btn-uppercase c-btn-sbold">
+            Đăng xuất
+        </a>
+    </li>
+}
+else
+{
+    <li>
+        <a href="javascript:;" data-toggle="modal" data-target="#login-form" class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-white c-btn-circle c-btn-uppercase c-btn-sbold">
+            <i class="icon-user"></i> Đăng nhập
+        </a>
+    </li>
+}

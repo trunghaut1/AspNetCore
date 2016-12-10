@@ -93,6 +93,7 @@
       "wwwroot/plugins/counterup/jquery.waypoints.min.js",
       "wwwroot/plugins/counterup/jquery.counterup.min.js",
       "wwwroot/plugins/fancybox/jquery.fancybox.pack.js",
+      "wwwroot/plugins/smooth-scroll/jquery.smooth-scroll.js",
       "wwwroot/plugins/slider-for-bootstrap/js/bootstrap-slider.js"
     ],
     // Optionally specify minification options
