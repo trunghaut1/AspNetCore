@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@model IdentityUser
+@{
+    ViewData["Title"] = "Tài khoản";
+}
+<!-- BEGIN: PAGE CONTAINER -->
+<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
+    <div class="container">
+        <div class="c-page-title c-pull-left">
+            <h3 class="c-font-uppercase c-font-sbold">Quản lý tài khoản</h3>
+        </div>
+        <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
+            <li>
+                <a asp-action="Index" asp-controller="Account">Quản lý tài khoản</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+<div class="container">
+    @Html.Partial("AccountMenuPartial")
+    <div class="c-layout-sidebar-content ">
+        <!-- BEGIN: PAGE CONTENT -->
+        <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
+        <div class="c-content-title-1">
+            <h3 class="c-font-uppercase c-font-bold">Thông tin tài khoản</h3>
+        </div>
+        <div class="row c-margin-b-40 c-order-history-2">
+            <div class="row c-margin-b-10">
+                <div class="col-md-3">
+                    Tên tài khoản:
+                </div>
+                <div class="col-md-8">
+                    @Model.NormalizedUserName
+                </div>
+            </div>
+            <div class="row c-margin-b-10">
+                <div class="col-md-3">
+                    Email:
+                </div>
+                <div class="col-md-8">
+                    @Model.Email
+                </div>
+            </div>
+            <div class="row c-margin-b-10">
+                <div class="col-md-3">
+                    Điện thoại:
+                </div>
+                <div class="col-md-8">
+                    @Model.PhoneNumber
+                </div>
+            </div>
+        </div>
+        <!-- END: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
+        <!-- END: PAGE CONTENT -->
+    </div>
+</div>

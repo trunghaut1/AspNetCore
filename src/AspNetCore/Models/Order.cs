@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace AspNetCore.Models
@@ -14,7 +15,9 @@ namespace AspNetCore.Models
         public int UserId { get; set; }
         public DateTime? Date { get; set; }
         public string Address { get; set; }
+        public bool? Shipped { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
         public virtual User User { get; set; }
     }

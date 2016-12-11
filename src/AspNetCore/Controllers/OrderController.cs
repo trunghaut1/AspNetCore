@@ -65,5 +65,9 @@ namespace AspNetCore.Controllers
                 return View(order);
             }
         }
+        public IActionResult ShowOrderDetail(int id)
+        {
+            return ViewComponent("OrderDetail", new { id = id});
+        }
     }
 }

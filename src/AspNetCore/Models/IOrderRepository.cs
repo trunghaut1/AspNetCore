@@ -10,5 +10,9 @@ namespace AspNetCore.Models
     {
         bool Add(Order order);
         OrderListViewModel GetOrderDetail(int pageSize, int page);
+        OrderViewModel GetOrder(int pageSize, int page);
+        bool SaveOrder(int id, bool shipped);
+        bool DeleteOrder(int id);
+        IEnumerable<OrderDetail> GetOrderDetailById(int id);
     }
 }

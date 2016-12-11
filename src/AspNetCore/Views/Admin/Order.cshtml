@@ -1,0 +1,118 @@
+﻿@model OrderViewModel
+@{
+    ViewData["Title"] = "Quản trị";
+}
+<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
+    <div class="container">
+        <div class="c-page-title c-pull-left">
+            <h3 class="c-font-uppercase c-font-sbold">Quản trị</h3>
+        </div>
+        <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
+            <li>
+                <a asp-action="Index" asp-controller="Admin">Quản trị</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+<div class="container">
+    @Html.Partial("AdminMenuPartial")
+    <div class="c-layout-sidebar-content ">
+        <!-- BEGIN: PAGE CONTENT -->
+        <!-- BEGIN: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
+        <div class="c-content-title-1">
+            <h3 class="c-font-uppercase c-font-bold">Danh sách đơn hàng</h3>
+        </div>
+        <div class="row c-margin-b-40 c-order-history-2 margin-right-10">
+            <div class="row c-cart-table-title">
+                <div class="col-md-1 c-cart-image">
+                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Mã</h3>
+                </div>
+                <div class="col-md-2 c-cart-ref">
+                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Khách hàng</h3>
+                </div>
+                <div class="col-md-4 c-cart-desc">
+                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Địa chỉ</h3>
+                </div>
+                <div class="col-md-2 c-cart-desc">
+                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Ngày</h3>
+                </div>
+                <div class="col-md-2 c-cart-qty">
+                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Trạng thái</h3>
+                </div>
+                <div class="col-md-1 c-cart-qty">
+                    <h3 class="c-font-uppercase c-font-bold c-font-16 c-font-grey-2">Xóa</h3>
+                </div>
+            </div>
+            <!-- BEGIN: ORDER HISTORY ITEM ROW -->
+            @foreach (var item in Model.Orders)
+            {
+                <div class="row c-cart-table-row">
+                    <h2 class="c-font-uppercase c-font-bold c-theme-bg c-font-white c-cart-item-title c-cart-item-first">@item.Id</h2>
+                    <div class="col-md-1 col-sm-3 col-xs-5 c-cart-image">
+                        <a onclick="showOrderDetail(@item.Id)" data-toggle="modal" data-target=".bs-example-modal-lg">@item.Id</a>
+                    </div>
+                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref">
+                        <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Khách hàng</p>
+                        <p>@item.User.Name</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6 c-cart-desc">
+                        <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Địa chỉ</p>
+                        <p>
+                            @item.Address
+                        </p>
+                    </div>
+                    <div class="clearfix col-md-2 col-sm-3 col-xs-6 c-cart-price">
+                        <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Ngày</p>
+                        <p class="c-cart-price ">@item.Date</p>
+                    </div>
+                    <div class="col-md-2 col-sm-3 col-xs-6 c-cart-qty">
+                        <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Trạng thái</p>
+                        <p>@if ((bool)item.Shipped)
+                        {
+                            <a asp-action="ChangeOrder" asp-route-shipped="false" asp-route-id="@item.Id" class="btn btn-xs c-btn-green c-font-uppercase c-font-bold c-btn-border-1x">Đã giao</a>
+                        }
+                        else
+                        {
+                            <a asp-action="ChangeOrder" asp-route-shipped="true" asp-route-id="@item.Id" class="btn btn-xs c-btn-green c-font-uppercase c-font-bold c-btn-border-1x">Chưa giao</a>
+                        }
+                        </p>
+                    </div>
+                    <div class="col-md-1 col-sm-3 col-xs-6 c-cart-qty">
+                        <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Xóa</p>
+                        <p><a asp-action="DeleteOrder" asp-route-id="@item.Id" class="btn btn-xs c-btn-red c-font-uppercase c-font-bold c-btn-border-1x">Xóa</a></p>
+                    </div>
+                </div>
+            }
+            <!-- END: ORDER HISTORY ITEM ROW -->
+        </div>
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content c-square">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="myLargeModalLabel">Chi tiết đơn hàng</h4>
+                    </div>
+                    <div id="modalBody" class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn c-btn-dark c-btn-border-2x c-btn-square c-btn-bold c-btn-uppercase" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- Small modal -->
+        <!-- END: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->
+        <!-- END: PAGE CONTENT -->
+    </div>
+</div>
+<div class="container c-margin-b-40 c-center">
+    <ul page-model="@Model.PagingInfo" page-action="Order" page-classes-enabled="true"
+        page-class-selected="c-active"
+        class="c-content-pagination c-theme"></ul>
+</div>

@@ -89,43 +89,7 @@
     <!-- END: HEADER -->
     <!-- END: LAYOUT/HEADERS/HEADER-1 -->
     <!-- BEGIN: CONTENT/USER/SIGNUP-FORM -->
-    <div class="modal fade c-content-login-form" id="signup-form" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content c-square">
-                <div class="modal-header c-no-border">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h3 class="c-font-24 c-font-sbold">Tạo tài khoản</h3>
-                    <p>Vui lòng điền đầy đủ thông tin bên dưới</p>
-                    <form>
-                        <div class="form-group">
-                            <label for="signup-email" class="hide">Email</label>
-                            <input type="email" class="form-control input-lg c-square" id="signup-email" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="signup-phone" class="hide">Số điện thoại</label>
-                            <input type="email" class="form-control input-lg c-square" id="signup-phone" placeholder="Số điện thoại">
-                        </div>
-                        <div class="form-group">
-                            <label for="signup-fullname" class="hide">Tên đầy đủ</label>
-                            <input type="email" class="form-control input-lg c-square" id="signup-fullname" placeholder="Tên đầy đủ">
-                        </div>
-                        <div class="form-group">
-                            <label for="signup-password" class="hide">Mật khẩu</label>
-                            <input type="email" class="form-control input-lg c-square" id="signup-password" placeholder="Mật khẩu">
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn c-theme-btn btn-md c-btn-uppercase c-btn-bold c-btn-square c-btn-login">Đăng ký</button>
-                            <a href="javascript:;" class="c-btn-forgot" data-toggle="modal" data-target="#login-form" data-dismiss="modal">Trở lại đăng nhập</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    @await Component.InvokeAsync("Signup")
     <!-- END: CONTENT/USER/SIGNUP-FORM -->
     <!-- BEGIN: CONTENT/USER/LOGIN-FORM -->
     @await Component.InvokeAsync("Login")

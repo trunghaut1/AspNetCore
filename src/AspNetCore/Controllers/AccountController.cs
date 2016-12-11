@@ -65,5 +65,29 @@ namespace AspNetCore.Controllers
             }
             return Redirect(returnUrl);
         }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Signup(IdentityUser user)
+        {
+            IdentityUser u = await userManager.FindByNameAsync(user.UserName);
+            if (u == null)
+            {
+                var n = await userManager.CreateAsync(user, user.PasswordHash);
+                if(n.Succeeded)
+                    TempData["Success"] = "Đã tạo tài khoản";
+                else
+                    TempData["Error"] = "Lỗi tạo tài khoản, kiểm tra lại thông tin";
+            }
+            else
+            {
+                TempData["Error"] = "Tài khoản đã tồn tại";
+            }
+            return Redirect("/");
+        }
+        public async Task<IActionResult> Info()
+        {
+            IdentityUser u = await userManager.FindByNameAsync(User.Identity.Name);
+            return View(u);
+        }
     }
 }

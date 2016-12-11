@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@model IdentityUser
+<div class="modal fade c-content-login-form" id="signup-form" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content c-square">
+            <div class="modal-header c-no-border">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="c-font-24 c-font-sbold">Tạo tài khoản</h3>
+                <p>Vui lòng điền đầy đủ thông tin bên dưới</p>
+                <form asp-action="Signup" asp-controller="Account" method="post">
+                    <div class="form-group">
+                        <input asp-for="UserName" type="text" class="form-control input-lg c-square"  placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="PhoneNumber" type="text" class="form-control input-lg c-square" placeholder="Số điện thoại">
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Email" type="email" class="form-control input-lg c-square" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="PasswordHash" type="password" class="form-control input-lg c-square" placeholder="Mật khẩu">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn c-theme-btn btn-md c-btn-uppercase c-btn-bold c-btn-square c-btn-login">Đăng ký</button>
+                        <a href="javascript:;" class="c-btn-forgot" data-toggle="modal" data-target="#login-form" data-dismiss="modal">Trở lại đăng nhập</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 

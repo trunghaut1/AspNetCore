@@ -77,3 +77,30 @@ function downCart(productId)
         }
     });
 }
+function showOrder(order)
+{
+    $("#order-id").html(order.id);
+    $("#order-date").html(order.date);
+    $("#order-address").html(order.address);
+    if(order.shipped)
+    {
+        $("#order-shipped").html("Đã giao");
+    }
+    else
+    {
+        $("#order-shipped").html("Chưa giao");
+    }
+}
+function showOrderDetail(id)
+{
+    $.ajax({
+        type: 'get',
+        url: '/order/showorderdetail',
+        data: {
+            id: id
+        },
+        success: function (response) {
+            $("#modalBody").html(response);
+        }
+    });
+}

@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref">
                             <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Đơn hàng</p>
-                            <p>@item.OrderId</p>
+                            <p><a onclick='showOrder(@Html.Raw(Json.Serialize(item.Order)))' data-toggle="modal" data-target="#myModal">@item.OrderId</a></p>
                         </div>
                         <div class="col-md-5 col-sm-6 col-xs-6 c-cart-desc">
                             <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Tên</p>
@@ -71,6 +71,41 @@
                         </div>
                     </div>
                 }
+                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content c-square">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">Thông tin đơn hàng</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row c-margin-b-10">
+                                    <div class="col-md-4">Mã đơn hàng: </div>
+                                    <div id="order-id" class="col-md-5"></div>
+                                </div>
+                                <div class="row c-margin-b-10">
+                                    <div class="col-md-4">Ngày đặt: </div>
+                                    <div id="order-date" class="col-md-5"></div>
+                                </div>
+                                <div class="row c-margin-b-10">
+                                    <div class="col-md-4">Địa chỉ: </div>
+                                    <div id="order-address" class="col-md-5"></div>
+                                </div>
+                                <div class="row c-margin-b-10">
+                                    <div class="col-md-4">Trạng thái: </div>
+                                    <div id="order-shipped" class="col-md-5"></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn c-theme-btn c-btn-border-2x c-btn-square c-btn-bold c-btn-uppercase" data-dismiss="modal">Đóng</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
                 <!-- END: ORDER HISTORY ITEM ROW -->
             </div>
             <!-- END: CONTENT/SHOPS/SHOP-ORDER-HISTORY-2 -->

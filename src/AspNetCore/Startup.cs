@@ -103,6 +103,16 @@ namespace AspNetCore
                 );
                 routes.MapRoute(
                     name: null,
+                    template: "Admin/page{page:int}",
+                    defaults: new { controller = "Admin", action = "Index" }
+                );
+                routes.MapRoute(
+                    name: null,
+                    template: "Admin/Order/page{page:int}",
+                    defaults: new { controller = "Admin", action = "Order" }
+                );
+                routes.MapRoute(
+                    name: null,
                     template: "Product/{id:int?}",
                     defaults: new { controller = "Home", action = "Product"}
                 );

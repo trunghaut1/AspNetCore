@@ -5,6 +5,13 @@
 .margin-right-5 {
     margin-right: 5px;
 }
+.margin-right-10 {
+    margin-right: 10px;
+}
 .c-layout-header .c-cart-menu .c-cart-menu-items {
     max-height: 400px;
+}
+.product-image-preview {
+    height: 50%;
+    width: 50%;
 }

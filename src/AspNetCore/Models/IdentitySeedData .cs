@@ -17,11 +17,11 @@ namespace AspNetCore.Models
         {
             UserManager<IdentityUser> userManager = app.ApplicationServices
             .GetRequiredService<UserManager<IdentityUser>>();
-            IdentityUser user = await userManager.FindByIdAsync(adminUser);
+            IdentityUser user = await userManager.FindByNameAsync(adminUser);
             if (user == null)
             {
                 user = new IdentityUser("admin");
-                var n = await userManager.CreateAsync(user, adminPassword);
+                await userManager.CreateAsync(user, adminPassword);
             }
         }
     }

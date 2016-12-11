@@ -69,5 +69,39 @@ namespace AspNetCore.Models
                 }
             };
         }
+        public bool SaveProduct(Product product)
+        {
+            try
+            {
+                if(product.Id > 0)
+                {
+                    db.Product.Update(product);
+                }
+                else
+                {
+                    db.Product.Add(product);
+                }
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool Delete(int id)
+        {
+            try
+            {
+                Product product = db.Product.Find(id);
+                db.Product.Remove(product);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
