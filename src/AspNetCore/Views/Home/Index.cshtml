@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Product>
+
 @{
     ViewData["Title"] = "Trang chủ";
 }
@@ -53,7 +54,7 @@
     <!-- END OF SLIDER WRAPPER -->
 </section>
 <!-- END: LAYOUT/SLIDERS/REVO-SLIDER-1 -->
-<div class="c-content-box c-size-md c-bg-parallax" style="background-image: url(../../img/content/shop-backgrounds/127.jpg)">
+<div class="c-content-box c-size-md c-bg-parallax" style="background-image: url(/img/content/shop-backgrounds/127.jpg)">
     <div class="container">
         <div class="c-content-tab-5 c-bs-grid-reset-space">
             <!-- Nav tabs -->
@@ -73,7 +74,7 @@
                                         <a asp-action="List" asp-controller="Home" asp-route-id="2" asp-route-page="1" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Văn học</a>
                                     </div>
                                 </div>
-                                <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 270px; background-image: url(../../img/content/shop2/67.jpg);"></div>
+                                <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 270px; background-image: url(/img/content/shop2/67.jpg);"></div>
                                 <div class="c-overlay-border"></div>
                             </div>
                         </div>
@@ -84,7 +85,7 @@
                                         <a asp-action="List" asp-controller="Home" asp-route-id="5" asp-route-page="1" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Kinh tế</a>
                                     </div>
                                 </div>
-                                <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 270px; background-image: url(../../img/content/shop2/85.jpg);"></div>
+                                <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 270px; background-image: url(/img/content/shop2/85.jpg);"></div>
                                 <div class="c-overlay-border"></div>
                             </div>
                         </div>
@@ -95,7 +96,7 @@
                                         <a asp-action="List" asp-controller="Home" asp-route-id="1" asp-route-page="1" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Truyện</a>
                                     </div>
                                 </div>
-                                <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 270px; background-image: url(../../img/content/shop2/63.jpg);"></div>
+                                <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 270px; background-image: url(/img/content/shop2/63.jpg);"></div>
                                 <div class="c-overlay-border"></div>
                             </div>
                         </div>
@@ -105,41 +106,14 @@
         </div>
     </div>
 </div>
-<div class="c-content-box c-size-md c-overflow-hide c-bs-grid-small-space" style="background-image: url(../../img/content/shop-backgrounds/139.jpg)">
+<div class="c-content-box c-size-md c-overflow-hide c-bs-grid-small-space" style="background-image: url(/img/content/shop-backgrounds/139.jpg)">
     <div class="container">
         <div class="c-content-title-1">
             <h3 class="c-font-uppercase c-center c-font-bold">Sách mới</h3>
             <div class="c-line-center c-theme-bg"></div>
         </div>
         <div class="row">
-            @foreach (Product item in Model)
-            {
-                <div class="col-md-3 col-sm-6 c-margin-b-20">
-                    <div class="c-content-product-2 c-bg-white">
-                        <div class="c-content-overlay">
-                            <div class="c-label c-label-right c-theme-bg c-font-uppercase c-font-white c-font-13 c-font-bold">Mới</div>
-                            <div class="c-overlay-wrapper">
-                                <div class="c-overlay-content">
-                                    <a asp-action="Product" asp-controller="Home" asp-route-id="@item.Id" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Xem</a>
-                                </div>
-                            </div>
-                            <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 330px; background-image: url(@item.Image);"></div>
-                        </div>
-                        <div class="c-info">
-                            <p class="c-title c-font-18 c-font-slim">@item.Name.Substring(0, item.Name.Length > 24 ? 24 : item.Name.Length)</p>
-                            <p class="c-price c-font-16 c-font-slim c-font-red">
-                                @string.Format("{0:C}", item.Price)
-                            </p>
-                        </div>
-                        <div class="btn-group btn-group-justified" role="group">
-                                <div class="btn-group c-border-left c-border-top" role="group">
-                                    <a onclick="addToCart(@item.Id,1)" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">Thêm vào giỏ</a>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-
-            }
+            @Html.Partial("ProductListPartial", Model)
         </div>
     </div>
 </div>

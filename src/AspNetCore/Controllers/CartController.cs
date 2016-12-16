@@ -27,9 +27,9 @@ namespace AspNetCore.Controllers
         {
             return ViewComponent("CartSummary");
         }
-        public bool AddToCart(int productId, int quantity)
+        public bool AddToCart(int id, int quantity)
         {
-            Product product = repository.GetById(productId);
+            Product product = repository.GetById(id);
             if (product != null)
             {
                 Cart cart = GetCart();
@@ -39,13 +39,13 @@ namespace AspNetCore.Controllers
             }
             return false;
         }
-        public bool DownCart(int productId)
+        public bool DownCart(int id)
         {
-            Product product = repository.GetById(productId);
+            Product product = repository.GetById(id);
             if (product != null)
             {
                 Cart cart = GetCart();
-                var line = cart.Lines.Where(o => o.Product.Id == productId).SingleOrDefault();
+                var line = cart.Lines.Where(o => o.Product.Id == id).SingleOrDefault();
                 if (line.Quantity > 1)
                     line.Quantity -= 1;
                 else return false;
@@ -54,9 +54,9 @@ namespace AspNetCore.Controllers
             }
             return false;
         }
-        public bool RemoveFromCart(int productId)
+        public bool RemoveFromCart(int id)
         {
-            Product product = repository.GetById(productId);
+            Product product = repository.GetById(id);
             if (product != null)
             {
                 Cart cart = GetCart();

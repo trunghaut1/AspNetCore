@@ -3,23 +3,8 @@
     ViewData["Title"] = "Thanh toán";
     Cart cart = (Cart)ViewBag.cart;
 }
-<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
-<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
-    <div class="container">
-        <div class="c-page-title c-pull-left">
-            <h3 class="c-font-uppercase c-font-sbold">Thanh toán</h3>
-            <h4 class="">Thông tin đơn hàng</h4>
-        </div>
-        <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
-            <li>
-                <a asp-action="Index" asp-controller="Cart">Giỏ hàng</a>
-            </li>
-            <li>/</li>
-            <li><a asp-action="Checkout" asp-controller="Order">Thanh toán</a></li>
-        </ul>
-    </div>
-</div>
-<!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+
+@Html.Partial("Header", "Thanh toán")
 <!-- BEGIN: PAGE CONTENT -->
 <div class="c-content-box c-size-lg">
     <div class="container">
@@ -68,10 +53,10 @@
                             {
                                 <li class="row c-margin-b-15 c-margin-t-15">
                                     <div class="col-md-6 c-font-20">
-                                        <a href="shop-product-details.html" class="c-theme-link">@item.Product.Name x @item.Quantity</a>
+                                        <a asp-action="Product" asp-controller="Home" asp-route-id="@item.Product.Id" class="c-theme-link">@item.Product.Name x @item.Quantity</a>
                                     </div>
                                     <div class="col-md-6 c-font-20">
-                                        <p class="">@(((int)(item.Quantity * item.Product.Price)).ToString("c"))</p>
+                                        <p class="">@((item.Quantity * item.Product.Price).ToString("c"))</p>
                                     </div>
                                 </li>
                             }

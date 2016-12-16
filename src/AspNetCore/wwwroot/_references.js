@@ -1,5 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="js/app.js" />
+/// <reference path="js/bootstrap-notify.min.js" />
 /// <reference path="js/components.js" />
 /// <reference path="js/components-shop.js" />
 /// <reference path="js/core.min.js" />

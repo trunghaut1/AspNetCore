@@ -11,7 +11,6 @@ namespace AspNetCore.Models
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
         public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,13 +29,10 @@ namespace AspNetCore.Models
 
                 entity.Property(e => e.Date).HasColumnType("datetime");
 
-                entity.Property(e => e.UserId).HasColumnName("UserID");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Order)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Order_User");
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasColumnName("UserID")
+                    .HasMaxLength(256);
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
@@ -75,17 +71,6 @@ namespace AspNetCore.Models
                     .HasForeignKey(d => d.CatId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Product_Cat");
-            });
-
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Email).HasMaxLength(256);
-
-                entity.Property(e => e.Name).HasMaxLength(256);
-
-                entity.Property(e => e.Phone).HasMaxLength(20);
             });
         }
     }

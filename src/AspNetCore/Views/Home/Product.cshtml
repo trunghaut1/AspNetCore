@@ -1,24 +1,10 @@
 ﻿@model Product
 @{
     ViewData["Title"] = "Sản phẩm";
+    IEnumerable<Product> relPro = (IEnumerable<Product>)ViewBag.RelatedPro;
 }
-<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
-    <div class="container">
-        <div class="c-page-title c-pull-left">
-            <h3 class="c-font-uppercase c-font-sbold">@Model.Name</h3>
-            <h4 class="">Sách</h4>
-        </div>
-        <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
-            <li>
-                <a asp-action="List" asp-controller="Home" asp-route-id="" asp-route-page="1">Loại</a>
-            </li>
-            <li>/</li>
-            <li>
-                <a asp-action="List" asp-controller="Home" asp-route-id="@Model.CatId" asp-route-page="1">@Model.Cat?.Name</a>
-            </li>
-        </ul>
-    </div>
-</div>
+@Html.Partial("Header", "Sản phẩm")
+
 <!-- BEGIN: CONTENT/SHOPS/SHOP-PRODUCT-DETAILS-2 -->
 <div class="c-content-box c-size-lg c-overflow-hide c-bg-white">
     <div class="container">
@@ -28,7 +14,7 @@
                     <div class="c-product-gallery">
                         <div class="c-product-gallery-content">
                             <div class="c-zoom">
-                                <img src="~/@Model.Image">
+                                <img src="@Model.Image">
                             </div>
                         </div>
                     </div>
@@ -74,7 +60,14 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-xs-12 c-margin-t-20">
-                                    <button onclick="addToCart(@Model.Id,$('#cartQuantity').val())" class="btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">Thêm vào giỏ</button>
+                                    @if (Model.Quantity > 0)
+                                    {
+                                        <button onclick="AddToCart(@Model.Id,$('#cartQuantity').val())" class="btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">Thêm vào giỏ</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">Hết hàng</button>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -104,13 +97,13 @@
     </div>
 </div>
 
-<div class="c-content-box c-size-md c-bg-parallax" style="background-image: url(../../img/content/shop-backgrounds/127.jpg)">
+<div class="c-content-box c-size-md c-bg-parallax" style="background-image: url(/img/content/shop-backgrounds/127.jpg)">
     <div class="container">
         <div class="c-content-title-1">
             <h3 class="c-center c-font-uppercase c-font-bold c-font-white">Sản phẩm liên quan</h3>
             <div class="c-line-center c-theme-bg"></div>
         </div>
-        @await Component.InvokeAsync("ProductList");
+        @Html.Partial("ProductListPartial", relPro)
     </div>
 </div>
 @section scripts {

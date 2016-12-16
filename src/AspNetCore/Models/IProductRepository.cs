@@ -16,5 +16,6 @@ namespace AspNetCore.Models
         ProductListViewModel Search(string search, int pageSize, int page);
         bool SaveProduct(Product product);
         bool Delete(int id);
+        void MinusQuantity(int id, int quantity);
     }
 }

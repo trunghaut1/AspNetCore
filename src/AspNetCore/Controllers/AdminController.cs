@@ -20,21 +20,41 @@ namespace AspNetCore.Controllers
         private IProductRepository productRepo;
         private IOrderRepository orderRepo;
         private IHostingEnvironment _environment;
+        private ICatRepository catRepo;
         public int pageSize = 5;
 
-        public AdminController(IProductRepository productRepo, IHostingEnvironment environment, IOrderRepository orderRepo)
+        public AdminController(IProductRepository productRepo, IHostingEnvironment environment, IOrderRepository orderRepo,
+            ICatRepository catRepo)
         {
             this.productRepo = productRepo;
             this.orderRepo = orderRepo;
+            this.catRepo = catRepo;
             _environment = environment;
         }
         // GET: /<controller>/
+        [AllowAnonymous]
         public IActionResult Index(int page = 1)
         {
-            return View(productRepo.GetPage(pageSize, page));
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("admin"))
+                {
+                    return View(productRepo.GetPage(pageSize, page));
+                }
+                else
+                {
+                    TempData["Message"] = new[] { "danger", "Tài khoản không có quyền quản trị" };
+                    return Redirect("/");
+                }
+            }
+            else
+            {
+                return Redirect("/");
+            }
         }
         public IActionResult Product(int id)
         {
+            ViewBag.Cat = catRepo.Cats;
             return View(new ProductFormViewModel
             {
                 product = productRepo.GetById(id)
@@ -54,26 +74,30 @@ namespace AspNetCore.Controllers
             }
             if(productRepo.SaveProduct(model.product))
             {
-                TempData["Success"] = "Đã lưu sản phẩm";
+                TempData["Message"] = new[] { "success", "Đã lưu sản phẩm" };
                 return View("Index", productRepo.GetPage(pageSize, 1));
             }
             else
             {
-                TempData["Error"] = "Lỗi lưu sản phẩm";
+                TempData["Message"] = new[] { "danger", "Lỗi lưu sản phẩm" };
                 return View(model);
             }
         }
-        public ViewResult CreateProduct() => View("Product", new ProductFormViewModel());
+        public ViewResult CreateProduct()
+        {
+            ViewBag.Cat = catRepo.Cats;
+            return View("Product", new ProductFormViewModel());
+        }
         public IActionResult DeleteProduct(int id)
         {
             if(productRepo.Delete(id))
             {
-                TempData["Success"] = "Đã xóa sản phẩm";
+                TempData["Message"] = new[] {"success", "Đã xóa sản phẩm" };
                 return View("Index", productRepo.GetPage(pageSize, 1));
             }
             else
             {
-                TempData["Error"] = "Lỗi xóa sản phẩm";
+                TempData["Message"] = new[] {"danger", "Lỗi xóa sản phẩm" };
                 return View("Index", productRepo.GetPage(pageSize, 1));
             }
         }
@@ -85,11 +109,11 @@ namespace AspNetCore.Controllers
         {
             if(orderRepo.SaveOrder(id,shipped))
             {
-                TempData["Success"] = "Cập nhật đơn hàng thành công";
+                TempData["Message"] = new[] { "success", "Cập nhật đơn hàng thành công" };
             }
             else
             {
-                TempData["Error"] = "Cập nhật đơn hàng thất bại";
+                TempData["Message"] = new[] { "danger", "Cập nhật đơn hàng thất bại" };
             }
             return View("Order", orderRepo.GetOrder(10, 1));
         }
@@ -97,11 +121,11 @@ namespace AspNetCore.Controllers
         {
             if (orderRepo.DeleteOrder(id))
             {
-                TempData["Success"] = "Xóa đơn hàng thành công";
+                TempData["Message"] = new[] { "success", "Xóa đơn hàng thành công" };
             }
             else
             {
-                TempData["Error"] = "Xóa đơn hàng thất bại";
+                TempData["Message"] = new[] { "danger", "Xóa đơn hàng thất bại" };
             }
             return View("Order", orderRepo.GetOrder(10, 1));
         }

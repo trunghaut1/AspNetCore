@@ -2,29 +2,10 @@
 @{
     ViewData["Title"] = "Sản phẩm";
 }
-<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
-    <div class="container">
-        <div class="c-page-title c-pull-left">
-            <h3 class="c-font-uppercase c-font-sbold">Danh sách sản phẩm</h3>
-            <h4 class="">Sách</h4>
-        </div>
-        <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
-            <li>
-                <a asp-action="List" asp-controller="Home" asp-route-id="" asp-route-page="1">Loại</a>
-            </li>
-            <li>/</li>
-            <li>
-                <a asp-action="List" asp-controller="Home" asp-route-id="@ViewBag.CatID" asp-route-page="1">@ViewBag.Cat</a>
-            </li>
-        </ul>
-    </div>
-</div>
+@Html.Partial("Header", (string)ViewBag.CatName ?? "Danh sách sản phẩm")
 <div class="container">
-    <div class="c-margin-t-20"></div>
-    @foreach (Product item in Model.Products)
-    {
-        @Html.Partial("ProductListTreePartial", item)
-    }
+    <div class="c-margin-t-30"></div>
+    @Html.Partial("ProductTreePartial", Model.Products)
 </div>
 <div class="container c-margin-b-40 c-center">
     <ul page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"

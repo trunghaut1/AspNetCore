@@ -1,62 +1,119 @@
-﻿@using Microsoft.AspNetCore.Identity
-@model IEnumerable<Cat>
-<li>
-    <a href="~/" class="c-active c-link">
-        Trang chủ
-        <span class="c-arrow c-toggler"></span>
-    </a>
-</li>
-<li class="c-menu-type-classic">
-    <a asp-action="List" asp-controller="Home" asp-route-page="1" asp-route-id="" class="c-link dropdown-toggle">
-        Loại sách
-        <span class="c-arrow c-toggler"></span>
-    </a>
-    <ul class="dropdown-menu c-menu-type-classic c-pull-left">
-        @foreach (Cat item in Model)
-        {
-            <li class="dropdown-submenu">
-                <a asp-action="List" asp-controller="Home" asp-route-id="@item.Id" asp-route-page="1">
-                    @item.Name
-                    <span class="c-arrow c-toggler"></span>
-                </a>
-            </li>
-        }
-    </ul>
-</li>
-<li>
-    <a asp-action="Contact" asp-controller="Home" class="c-link">
-        Liên hệ
-    </a>
-</li>
-<li class="c-search-toggler-wrapper">
-    <a href="#" class="c-btn-icon c-search-toggler">
-        <i class="fa fa-search"></i>
-    </a>
-</li>
-<li class="c-cart-toggler-wrapper">
-    <a asp-action="Index" asp-controller="Cart" class="c-btn-icon c-cart-toggler">
-        <i class="icon-handbag c-cart-icon"></i>
-        <span id="cartNumber" class="c-cart-number c-theme-bg">@ViewBag.cartNumber</span>
-    </a>
-</li>
-@if (User.Identity.IsAuthenticated)
-{
-    <li>
-        <a asp-action="Index" asp-controller="Account" asp-route-page="1" class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-white c-btn-circle c-btn-uppercase c-btn-sbold">
-            <i class="icon-user"></i> Tài khoản
-        </a>
-    </li>
-    <li>
-        <a asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.RouteUrl(ViewContext.RouteData.Values)" class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-white c-btn-circle c-btn-uppercase c-btn-sbold">
-            Đăng xuất
-        </a>
-    </li>
-}
-else
-{
-    <li>
-        <a href="javascript:;" data-toggle="modal" data-target="#login-form" class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-white c-btn-circle c-btn-uppercase c-btn-sbold">
-            <i class="icon-user"></i> Đăng nhập
-        </a>
-    </li>
-}
+﻿@model IEnumerable<Cat>
+
+<header class="c-layout-header c-layout-header-2 c-layout-header-dark-mobile c-header-transparent-dark" data-minimize-offset="80">
+    <div class="c-navbar">
+        <div class="container">
+            <!-- BEGIN: BRAND -->
+            <div class="c-navbar-wrapper clearfix">
+                <div class="c-brand c-pull-left">
+                    <a href="~/" class="c-logo">
+                        <img src="~/images/logo-1.png" alt="Shop" class="c-desktop-logo">
+                        <img src="~/images/logo-1.png" alt="Shop" class="c-desktop-logo-inverse">
+                        <img src="~/images/logo-1.png" alt="Shop" class="c-mobile-logo">
+                    </a>
+                    <button class="c-hor-nav-toggler" type="button" data-target=".c-mega-menu">
+                        <span class="c-line"></span>
+                        <span class="c-line"></span>
+                        <span class="c-line"></span>
+                    </button>
+                    <button class="c-topbar-toggler" type="button">
+                        <i class="fa fa-ellipsis-v"></i>
+                    </button>
+                    <button class="c-search-toggler" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <button class="c-cart-toggler" type="button">
+                        <i class="icon-handbag"></i>
+                        <span id="cartNumber2" class="c-cart-number c-theme-bg"></span>
+                    </button>
+                </div>
+                <!-- END: BRAND -->
+                <!-- BEGIN: QUICK SEARCH -->
+                <form class="c-quick-search" asp-action="Search" asp-controller="Home" asp-route-page="1">
+                    <input type="text" name="search" placeholder="Nhập tên sách cần tìm..." value="" class="form-control" autocomplete="off">
+                    <span class="c-theme-link">&times;</span>
+                </form>
+                <!-- END: QUICK SEARCH -->
+                <!-- BEGIN: HOR NAV -->
+                <!-- BEGIN: LAYOUT/HEADERS/MEGA-MENU -->
+                <!-- BEGIN: MEGA MENU -->
+                <!-- Dropdown menu toggle on mobile: c-toggler class can be applied to the link arrow or link itself depending on toggle mode -->
+                <nav class="c-mega-menu c-pull-right c-mega-menu-dark c-mega-menu-dark-mobile c-theme c-fonts-uppercase c-fonts-bold">
+                    <ul class="nav navbar-nav c-theme-nav">
+                        <li>
+                            <a href="~/" class="c-active c-link">
+                                Trang chủ
+                                <span class="c-arrow c-toggler"></span>
+                            </a>
+                        </li>
+                        <li class="c-menu-type-classic">
+                            <a asp-action="List" asp-controller="Home" asp-route-page="1" asp-route-id="" class="c-link dropdown-toggle">
+                                Loại sách
+                                <span class="c-arrow c-toggler"></span>
+                            </a>
+                            <ul class="dropdown-menu c-menu-type-classic c-pull-left">
+                                @foreach (Cat item in Model)
+                                {
+                                    <li class="dropdown-submenu">
+                                        <a asp-action="List" asp-controller="Home" asp-route-id="@item.Id" asp-route-page="1">
+                                            @item.Name
+                                            <span class="c-arrow c-toggler"></span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="c-search-toggler-wrapper">
+                            <a href="#" class="c-btn-icon c-search-toggler">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                        <li class="c-cart-toggler-wrapper">
+                            <a asp-action="Index" asp-controller="Cart" class="c-btn-icon c-cart-toggler">
+                                <i class="icon-handbag c-cart-icon"></i>
+                                <span id="cartNumber" class="c-cart-number c-theme-bg">@ViewBag.cartNumber</span>
+                            </a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="Account" asp-route-page="1" class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-white c-btn-circle c-btn-uppercase c-btn-sbold">
+                                    <i class="icon-user"></i> Tài khoản
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.RouteUrl(ViewContext.RouteData.Values)" class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-white c-btn-circle c-btn-uppercase c-btn-sbold">
+                                    Đăng xuất
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="javascript:;" data-toggle="modal" data-target="#login-form" class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-white c-btn-circle c-btn-uppercase c-btn-sbold">
+                                    <i class="icon-user"></i> Đăng nhập
+                                </a>
+                            </li>
+                        }
+                        @if (User.IsInRole("admin"))
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="Admin" asp-route-page="1" class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-white c-btn-circle c-btn-uppercase c-btn-sbold">
+                                    Quản trị
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+                <!-- END: MEGA MENU -->
+                <!-- END: LAYOUT/HEADERS/MEGA-MENU -->
+                <!-- END: HOR NAV -->
+            </div>
+            <!-- BEGIN: LAYOUT/HEADERS/QUICK-CART -->
+            <!-- BEGIN: CART MENU -->
+            @await Component.InvokeAsync("CartSummary")
+            <!-- END: CART MENU -->
+            <!-- END: LAYOUT/HEADERS/QUICK-CART -->
+        </div>
+    </div>
+</header>

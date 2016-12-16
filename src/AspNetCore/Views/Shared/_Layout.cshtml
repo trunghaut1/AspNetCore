@@ -1,12 +1,8 @@
 ﻿<!DOCTYPE html>
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!-->
 <html lang="vi">
-<!--<![endif]-->
-<!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>@ViewData["Title"] - AspNetCore</title>
+    <title>@ViewData["Title"] - BookShop</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -22,157 +18,77 @@
     <!-- BEGIN THEME STYLES -->
     <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
     <!-- END THEME STYLES -->
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico"/>
 </head>
-<body class="c-layout-header-fixed c-layout-header-mobile-fixed @ViewBag.headerFull">
-<!-- BEGIN: LAYOUT/HEADERS/HEADER-1 -->
-
-
+<body class="c-layout-header-fixed c-layout-header-mobile-fixed c-layout-header-fullscreen">
 <!-- BEGIN: HEADER -->
+@await Component.InvokeAsync("Menu")
+<!-- END: HEADER -->
 
 
-<header class="c-layout-header c-layout-header-@(ViewBag.header ?? "3") c-layout-header-dark-mobile @ViewBag.headerTrans" data-minimize-offset="80">
-        <div class="c-navbar">
-            <div class="container">
-                <!-- BEGIN: BRAND -->
-                <div class="c-navbar-wrapper clearfix">
-                    <div class="c-brand c-pull-left">
-                        <a href="~/" class="c-logo">
-                            <img src="~/images/logo-1.png" alt="Shop" class="c-desktop-logo">
-                            <img src="~/images/logo-1.png" alt="Shop" class="c-desktop-logo-inverse">
-                            <img src="~/images/logo-1.png" alt="Shop" class="c-mobile-logo">
-                        </a>
-                        <button class="c-hor-nav-toggler" type="button" data-target=".c-mega-menu">
-                            <span class="c-line"></span>
-                            <span class="c-line"></span>
-                            <span class="c-line"></span>
-                        </button>
-                        <button class="c-topbar-toggler" type="button">
-                            <i class="fa fa-ellipsis-v"></i>
-                        </button>
-                        <button class="c-search-toggler" type="button">
-                            <i class="fa fa-search"></i>
-                        </button>
-                        <button class="c-cart-toggler" type="button">
-                            <i class="icon-handbag"></i>
-                            <span id="cartNumber2" class="c-cart-number c-theme-bg"></span>
-                        </button>
-                    </div>
-                    <!-- END: BRAND -->
-                    <!-- BEGIN: QUICK SEARCH -->
-                    <form class="c-quick-search" asp-action="Search" asp-controller="Home" asp-route-page="1">
-                        <input type="text" name="search" placeholder="Nhập tên sách cần tìm..." value="" class="form-control" autocomplete="off">
-                        <span class="c-theme-link">&times;</span>
-                    </form>
-                    <!-- END: QUICK SEARCH -->
-                    <!-- BEGIN: HOR NAV -->
-                    <!-- BEGIN: LAYOUT/HEADERS/MEGA-MENU -->
-                    <!-- BEGIN: MEGA MENU -->
-                    <!-- Dropdown menu toggle on mobile: c-toggler class can be applied to the link arrow or link itself depending on toggle mode -->
-                    <nav class="c-mega-menu c-pull-right c-mega-menu-dark c-mega-menu-dark-mobile c-theme c-fonts-uppercase c-fonts-bold">
-                        <ul class="nav navbar-nav c-theme-nav">
-                            @await Component.InvokeAsync("Menu")
-                        </ul>
-                    </nav>
-                    <!-- END: MEGA MENU -->
-                    <!-- END: LAYOUT/HEADERS/MEGA-MENU -->
-                    <!-- END: HOR NAV -->
-                </div>
-                <!-- BEGIN: LAYOUT/HEADERS/QUICK-CART -->
-                <!-- BEGIN: CART MENU -->
-                @await Component.InvokeAsync("CartSummary")
-                <!-- END: CART MENU -->
-                <!-- END: LAYOUT/HEADERS/QUICK-CART -->
-            </div>
-        </div>
-    </header>
-    <!-- END: HEADER -->
-    <!-- END: LAYOUT/HEADERS/HEADER-1 -->
-    <!-- BEGIN: CONTENT/USER/SIGNUP-FORM -->
-    @await Component.InvokeAsync("Signup")
-    <!-- END: CONTENT/USER/SIGNUP-FORM -->
-    <!-- BEGIN: CONTENT/USER/LOGIN-FORM -->
-    @await Component.InvokeAsync("Login")
-    <!-- END: CONTENT/USER/LOGIN-FORM -->
-    <!-- BEGIN: PAGE CONTAINER -->
-    <div class="c-layout-page">
-        <!-- BEGIN: PAGE CONTENT -->
-        @RenderBody()
-        <!-- END: PAGE CONTENT -->
-        <!-- BEGIN: CONTENT/MISC/COOKIES-3 -->
-        @if (TempData["Error"] != null)
-        {
-            <div class="c-cookies-bar c-cookies-bar-2 c-cookies-bar-bottom c-border-thick c-border-red c-bg-dark wow animated fadeInUp" data-wow-delay="1s">
-                <div class="c-cookies-bar-container">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div class="c-cookies-bar-content c-font-white">
-                                @TempData["Error"]
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="c-cookies-bar-btn">
-                                <a class="c-cookies-bar-close btn c-btn-red c-btn-square c-btn-bold" href="javascript:;">OK!</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-        @if (TempData["Success"] != null)
-        {
-            <div class="c-cookies-bar c-cookies-bar-2 c-cookies-bar-bottom c-theme-bg c-rounded wow animated fadeInUp" data-wow-delay="1s">
-                <div class="c-cookies-bar-container">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div class="c-cookies-bar-content c-font-white">
-                                @TempData["Success"]
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="c-cookies-bar-btn">
-                                <a class="c-cookies-bar-close btn c-btn-white c-btn-square c-btn-bold" href="javascript:;">OK!</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-        <!-- END: CONTENT/MISC/COOKIES-3 -->
-    </div>
-    <!-- END: PAGE CONTAINER -->
-    <!-- BEGIN: LAYOUT/FOOTERS/FOOTER-2 -->
-    <a name="footer"></a>
-    @await Component.InvokeAsync("Footer")
-    <!-- END: LAYOUT/FOOTERS/FOOTER-2 -->
-    <!-- BEGIN: LAYOUT/FOOTERS/GO2TOP -->
-    <div class="c-layout-go2top">
-        <i class="icon-arrow-up"></i>
-    </div>
-    <!-- END: LAYOUT/FOOTERS/GO2TOP -->
-    <!-- BEGIN: LAYOUT/BASE/BOTTOM -->
-    <!-- BEGIN: CORE PLUGINS -->
-    <!--[if lt IE 9]>
-    <script src="../assets/global/plugins/excanvas.min.js"></script>
-    <![endif]-->
-    <script src="~/js/core.min.js" type="text/javascript"></script>
-    <!-- END: CORE PLUGINS -->
-    <!-- BEGIN: LAYOUT PLUGINS -->
-    <script src="~/js/layout.min.js" type="text/javascript"></script>
-    <!-- END: LAYOUT PLUGINS -->
-    <!-- BEGIN: THEME SCRIPTS -->
-    <script src="~/js/site.min.js" type="text/javascript"></script>
-    <script>
+@await Component.InvokeAsync("Signup")
+
+
+@await Component.InvokeAsync("Login")
+
+<!-- BEGIN: PAGE CONTAINER -->
+<div class="c-layout-page">
+@RenderBody()
+</div>
+<!-- END: PAGE CONTAINER -->
+
+<!-- BEGIN: LAYOUT/FOOTERS/FOOTER-2 -->
+<a name="footer"></a>
+@Html.Partial("Footer")
+<!-- END: LAYOUT/FOOTERS/FOOTER-2 -->
+
+
+<div class="c-layout-go2top">
+    <i class="icon-arrow-up"></i>
+</div>
+
+
+<!-- BEGIN: CORE PLUGINS -->
+<script src="~/js/core.min.js" type="text/javascript"></script>
+<!-- END: CORE PLUGINS -->
+<!-- BEGIN: LAYOUT PLUGINS -->
+<script src="~/js/layout.min.js" type="text/javascript"></script>
+<!-- END: LAYOUT PLUGINS -->
+<!-- BEGIN: THEME SCRIPTS -->
+<script src="~/js/site.min.js" type="text/javascript"></script>
+<script>
             $(document).ready(function()
             {
                 App.init(); // init core
             });
+</script>
+<!-- END: THEME SCRIPTS -->
+<!-- BEGIN: PAGE SCRIPTS -->
+@RenderSection("scripts", required: false)
+<script src="/js/bootstrap-notify.min.js" type="text/javascript"></script>
+@if (TempData["Message"] != null)
+{
+    <script>
+        $.notify({
+            // options
+            message: '@((TempData["Message"] as string[])[1])'
+        }, {
+            // settings
+            type: '@((TempData["Message"] as string[])[0])',
+            placement: {
+                from: "bottom",
+                align: "center"
+            },
+            animate: {
+                enter: 'animated fadeInUp',
+                exit: 'animated fadeOutDown'
+            },
+            delay: 2000,
+            mouse_over : "pause"
+        });
     </script>
-    <!-- END: THEME SCRIPTS -->
-    <!-- BEGIN: PAGE SCRIPTS -->
-    @RenderSection("scripts", required: false)
-    <script src="~/js/site.js" type="text/javascript"></script>
-    <!-- END: PAGE SCRIPTS -->
-    <!-- END: LAYOUT/BASE/BOTTOM -->
+}
+<script src="~/js/site.js" type="text/javascript"></script>
+<!-- END: PAGE SCRIPTS -->
 </body>
 </html>

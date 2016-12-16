@@ -2,20 +2,7 @@
 @{
     ViewData["Title"] = "Quản trị";
 }
-<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
-<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
-    <div class="container">
-        <div class="c-page-title c-pull-left">
-            <h3 class="c-font-uppercase c-font-sbold">Quản trị</h3>
-        </div>
-        <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
-            <li>
-                <a asp-action="Index" asp-controller="Admin">Quản trị</a>
-            </li>
-        </ul>
-    </div>
-</div>
-<!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+@Html.Partial("Header", "Quản trị")
 <div class="container">
     @Html.Partial("AdminMenuPartial")
     <div class="c-layout-sidebar-content ">
@@ -51,11 +38,11 @@
                 <div class="row c-cart-table-row">
                     <h2 class="c-font-uppercase c-font-bold c-theme-bg c-font-white c-cart-item-title c-cart-item-first">@item.Id</h2>
                     <div class="col-md-1 col-sm-3 col-xs-5 c-cart-image">
-                        <a onclick="showOrderDetail(@item.Id)" data-toggle="modal" data-target=".bs-example-modal-lg">@item.Id</a>
+                        <a onclick="ShowOrderDetail(@item.Id)" data-toggle="modal" data-target=".bs-example-modal-lg">#@item.Id</a>
                     </div>
                     <div class="col-md-2 col-sm-3 col-xs-6 c-cart-ref">
                         <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Khách hàng</p>
-                        <p>@item.User.Name</p>
+                        <p>@item.UserId</p>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-6 c-cart-desc">
                         <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Địa chỉ</p>

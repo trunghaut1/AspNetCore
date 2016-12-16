@@ -12,12 +12,14 @@ namespace AspNetCore.Controllers
     public class OrderController : Controller
     {
         private IOrderRepository repository;
+        private IProductRepository productRepo;
         private Cart cart;
 
-        public OrderController(IOrderRepository repoService, Cart cartService)
+        public OrderController(IOrderRepository repoService, Cart cartService, IProductRepository productRepo)
         {
             repository = repoService;
             cart = cartService;
+            this.productRepo = productRepo;
         }
         // GET: /<controller>/
         public IActionResult Index()
@@ -30,19 +32,19 @@ namespace AspNetCore.Controllers
             {
                 if (cart.Lines.Count() == 0)
                 {
-                    TempData["Error"] = "Giỏ hàng trống";
+                    TempData["Message"] = new[] { "danger", "Giỏ hàng trống" };
                     return Redirect("/Cart");
                 }
                 ViewBag.cart = cart;
                 return View(new Order());
             }
-            TempData["Error"] = "Vui lòng đăng nhập để thực hiện thanh toán";
+            TempData["Message"] = new[] {"danger", "Vui lòng đăng nhập để thực hiện thanh toán" };
             return Redirect("/Cart");
         }
         [HttpPost]
         public IActionResult Checkout(Order order)
         {
-            order.UserId = 1;
+            order.UserId = User.Identity.Name;
             order.Date = DateTime.Now;
             foreach(var value in cart.Lines)
             {
@@ -52,16 +54,17 @@ namespace AspNetCore.Controllers
                     ProductId = value.Product.Id,
                     Quantity = value.Quantity
                 });
+                productRepo.MinusQuantity(value.Product.Id, value.Quantity);
             }
             if(repository.Add(order))
             {
                 cart.Clear();
-                TempData["Success"] = "Đặt hàng thành công";
+                TempData["Message"] = new[] { "success", "Đặt hàng thành công" };
                 return Redirect("/Account");
             }
             else
             {
-                TempData["Error"] = "Lỗi đặt hàng";
+                TempData["Message"] = new[] { "danger", "Lỗi đặt hàng" };
                 return View(order);
             }
         }

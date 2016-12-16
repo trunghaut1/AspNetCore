@@ -8,10 +8,6 @@ namespace AspNetCore.Components
 {
     public class LoginViewComponent : ViewComponent
     {
-        public LoginViewComponent()
-        {
-
-        }
         public IViewComponentResult Invoke()
         {
             return View();

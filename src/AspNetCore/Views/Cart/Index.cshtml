@@ -2,21 +2,8 @@
 @{ 
     ViewData["Title"] = "Giỏ hàng";
 }
-<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
-<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
-    <div class="container">
-        <div class="c-page-title c-pull-left">
-            <h3 class="c-font-uppercase c-font-sbold">Giỏ hàng</h3>
-            <h4 class="">BookShop</h4>
-        </div>
-        <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
-            <li>
-                <a asp-action="Index" asp-controller="Cart">Giỏ hàng</a>
-            </li>
-        </ul>
-    </div>
-</div>
-<!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+
+@Html.Partial("Header", "Giỏ hàng")
 <!-- BEGIN: CONTENT/SHOPS/SHOP-CART-1 -->
 <div class="c-content-box c-size-lg">
     <div class="container">
@@ -64,10 +51,10 @@
                             <div class="c-input-group c-spinner">
                                 <input name="cartQuantity-@item.Product.Id" type="text" class="form-control c-item-@item.Product.Id" value="@item.Quantity">
                                 <div class="c-input-group-btn-vertical">
-                                    <button onclick="addToCart(@item.Product.Id,1)" class="btn btn-default" type="button" data_input="c-item-@item.Product.Id">
+                                    <button onclick="AddToCart(@item.Product.Id,1)" class="btn btn-default" type="button" data_input="c-item-@item.Product.Id">
                                         <i class="fa fa-caret-up"></i>
                                     </button>
-                                    <button onclick="downCart(@item.Product.Id)" class="btn btn-default" type="button" data_input="c-item-@item.Product.Id">
+                                    <button onclick="DownCart(@item.Product.Id)" class="btn btn-default" type="button" data_input="c-item-@item.Product.Id">
                                         <i class="fa fa-caret-down"></i>
                                     </button>
                                 </div>
@@ -75,15 +62,15 @@
                         </div>
                         <div class="col-md-2 col-sm-3 col-xs-6 c-cart-price">
                             <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Giá</p>
-                            <p class="c-cart-price c-font-bold">@(((int)item.Product.Price).ToString("c"))</p>
+                            <p class="c-cart-price c-font-bold">@item.Product.Price.ToString("c")</p>
                         </div>
                         <div class="col-md-1 col-sm-3 col-xs-6 c-cart-total">
                             <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Tổng</p>
-                            <p class="c-cart-price c-font-bold">@(((int)(item.Product.Price * item.Quantity)).ToString("c"))</p>
+                            <p class="c-cart-price c-font-bold">@((item.Product.Price * item.Quantity).ToString("c"))</p>
                         </div>
                         <div class="col-md-1 col-sm-12 c-cart-remove">
-                            <a onclick="removeFromCart(@item.Product.Id)" class="c-theme-link c-cart-remove-desktop">×</a>
-                            <a onclick="removeFromCart(@item.Product.Id)" class="c-cart-remove-mobile btn c-btn c-btn-md c-btn-square c-btn-red c-btn-border-1x c-font-uppercase">Xóa khỏi giỏ</a>
+                            <a onclick="RemoveFromCart(@item.Product.Id)" class="c-theme-link c-cart-remove-desktop">×</a>
+                            <a onclick="RemoveFromCart(@item.Product.Id)" class="c-cart-remove-mobile btn c-btn c-btn-md c-btn-square c-btn-red c-btn-border-1x c-font-uppercase">Xóa khỏi giỏ</a>
                         </div>
                     </div>
             }

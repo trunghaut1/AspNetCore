@@ -38,7 +38,6 @@ namespace AspNetCore
                                     Configuration["Data:DatabaseIdentity:ConnectionString"]));
             services.AddIdentity<IdentityUser, IdentityRole>()
                                     .AddEntityFrameworkStores<AppIdentityDbContext>();
-            services.AddScoped<IUserRepository, EFUserRepository>();
             services.AddScoped<ICatRepository, EFCatRepository>();
             services.AddScoped<IProductRepository, EFProductRepository>();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));

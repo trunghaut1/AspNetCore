@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Product>
+
+@foreach (Product i in Model)
+{
+    <div class="col-md-3 col-sm-6 c-margin-b-20">
+        <div class="c-content-product-2 c-bg-white">
+            <div class="c-content-overlay">
+                <div class="c-label c-label-right c-theme-bg c-font-uppercase c-font-white c-font-13 c-font-bold">Mới</div>
+                <div class="c-overlay-wrapper">
+                    <div class="c-overlay-content">
+                        <a asp-action="Product" asp-controller="Home" asp-route-id="@i.Id" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">Xem</a>
+                    </div>
+                </div>
+                <div class="c-bg-img-center c-overlay-object" data-height="height" style="height: 330px; background-image: url(@i.Image);"></div>
+            </div>
+            <div class="c-info">
+                <p class="c-title c-font-18 c-font-slim" style="min-height:50px;">@i.Name</p>
+                <p class="c-price c-font-16 c-font-slim c-font-red">
+                    @i.Price.ToString("c")
+                </p>
+            </div>
+            <div class="btn-group btn-group-justified" role="group">
+                <div class="btn-group c-border-left c-border-top" role="group">
+                    @if (i.Quantity > 0)
+                    {
+                        <a onclick="AddToCart(@i.Id,1)" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">Thêm vào giỏ</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square c-font-grey-3 c-font-white-hover c-bg-red-2-hover c-btn-product">Hết hàng</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

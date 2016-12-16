@@ -2,21 +2,8 @@
 @{ 
     ViewData["Title"] = "Tài khoản";
 }
-<!-- BEGIN: PAGE CONTAINER -->
-    <!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
-    <div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
-        <div class="container">
-            <div class="c-page-title c-pull-left">
-                <h3 class="c-font-uppercase c-font-sbold">Quản lý tài khoản</h3>
-            </div>
-            <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
-                <li>
-                    <a asp-action="Index" asp-controller="Account">Quản lý tài khoản</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+
+@Html.Partial("Header", "Tài khoản")
     <div class="container">
         @Html.Partial("AccountMenuPartial")
         <div class="c-layout-sidebar-content ">
@@ -49,11 +36,11 @@
                     <div class="row c-cart-table-row">
                         <h2 class="c-font-uppercase c-font-bold c-theme-bg c-font-white c-cart-item-title c-cart-item-first">@item.Product.Name</h2>
                         <div class="col-md-2 col-sm-3 col-xs-5 c-cart-image">
-                            <img src="/@item.Product.Image" />
+                            <img src="@item.Product.Image" />
                         </div>
                         <div class="col-md-1 col-sm-3 col-xs-6 c-cart-ref">
                             <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Đơn hàng</p>
-                            <p><a onclick='showOrder(@Html.Raw(Json.Serialize(item.Order)))' data-toggle="modal" data-target="#myModal">@item.OrderId</a></p>
+                            <p><a onclick='ShowOrder(@Html.Raw(Json.Serialize(item.Order)))' data-toggle="modal" data-target="#myModal">#@item.OrderId</a></p>
                         </div>
                         <div class="col-md-5 col-sm-6 col-xs-6 c-cart-desc">
                             <p class="c-cart-sub-title c-theme-font c-font-uppercase c-font-bold">Tên</p>

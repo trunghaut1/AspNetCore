@@ -103,5 +103,16 @@ namespace AspNetCore.Models
                 return false;
             }
         }
+        public void MinusQuantity(int id, int quantity)
+        {
+            Product value = db.Product.Find(id);
+            if (value.Quantity > 0)
+            {
+                value.Quantity -= quantity;
+                if (value.Quantity < 0)
+                    value.Quantity = 0;
+            }
+            db.SaveChanges();
+        }
     }
 }

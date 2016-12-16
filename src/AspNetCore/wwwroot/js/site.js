@@ -1,11 +1,11 @@
 ﻿// Write your Javascript code.
-function addToCart(productId, quantity)
+function AddToCart(id, quantity)
 {
     $.ajax({
         type: 'post',
         url: '/cart/addtocart',
         data: {
-            productId: productId,
+            id: id,
             quantity: quantity
         },
         success: function (response) {
@@ -31,12 +31,12 @@ function addToCart(productId, quantity)
         }
     });
 }
-function removeFromCart(productId) {
+function RemoveFromCart(id) {
     $.ajax({
         type: 'post',
         url: '/cart/removeFromCart',
         data: {
-            productId: productId
+            id: id
         },
         success: function (response) {
             if (response) {
@@ -62,13 +62,13 @@ function removeFromCart(productId) {
         }
     });
 }
-function downCart(productId)
+function DownCart(id)
 {
     $.ajax({
         type: 'post',
         url: '/cart/DownCart',
         data: {
-            productId: productId
+            id: id
         },
         success: function (response) {
             if (response) {
@@ -77,7 +77,7 @@ function downCart(productId)
         }
     });
 }
-function showOrder(order)
+function ShowOrder(order)
 {
     $("#order-id").html(order.id);
     $("#order-date").html(order.date);
@@ -91,7 +91,7 @@ function showOrder(order)
         $("#order-shipped").html("Chưa giao");
     }
 }
-function showOrderDetail(id)
+function ShowOrderDetail(id)
 {
     $.ajax({
         type: 'get',

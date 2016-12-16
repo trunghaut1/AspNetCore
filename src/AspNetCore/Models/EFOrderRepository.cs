@@ -18,7 +18,6 @@ namespace AspNetCore.Models
         {
             try
             {
-                order.Shipped = false;
                 db.Order.Add(order);
                 db.SaveChanges();
                 return true;
@@ -28,10 +27,11 @@ namespace AspNetCore.Models
                 return false;
             }
         }
-        public OrderListViewModel GetOrderDetail(int pageSize, int page)
+        public OrderListViewModel GetOrderDetail(string userId, int pageSize, int page)
         {
             IEnumerable<OrderDetail> orderDetail = db.OrderDetail.Include(o => o.Product).Include(o => o.Order)
-                .OrderByDescending(o => o.OrderId).Where(o => o.Order.UserId == 1)
+                .Where(o => o.Order.UserId == userId)
+                .OrderByDescending(o => o.OrderId)
                 .Skip((page - 1) * pageSize).Take(pageSize);
             return new OrderListViewModel
             {
@@ -40,13 +40,13 @@ namespace AspNetCore.Models
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = db.OrderDetail.Where(o => o.Order.UserId == 1).Count()
+                    TotalItems = db.OrderDetail.Where(o => o.Order.UserId == userId).Count()
                 }
             };
         }
         public OrderViewModel GetOrder(int pageSize, int page)
         {
-            IEnumerable<Order> order = db.Order.Include(o => o.OrderDetail).Include(o => o.User)
+            IEnumerable<Order> order = db.Order.Include(o => o.OrderDetail)
                 .OrderByDescending(o => o.Id)
                 .Skip((page - 1) * pageSize).Take(pageSize);
             return new OrderViewModel

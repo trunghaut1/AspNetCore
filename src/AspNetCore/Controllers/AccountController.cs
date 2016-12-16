@@ -31,7 +31,7 @@ namespace AspNetCore.Controllers
         // GET: /<controller>/
         public IActionResult Index(int page = 1)
         {
-            return View(repository.GetOrderDetail(pageSize, page));
+            return View(repository.GetOrderDetail(User.Identity.Name, pageSize, page));
         }
 
         [HttpPost]
@@ -48,12 +48,12 @@ namespace AspNetCore.Controllers
                     if ((await signInManager.PasswordSignInAsync(user,
                     loginModel.Password, false, false)).Succeeded)
                     {
-                        return Redirect(loginModel?.ReturnUrl ?? "/Admin/Index");
+                        return Redirect(loginModel?.ReturnUrl ?? "/Account/");
                     }
                 }
             }
             ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng");
-            TempData["Error"] = "Tên đăng nhập hoặc mật khẩu không đúng";
+            TempData["Message"] = new[] { "danger", "Tên đăng nhập hoặc mật khẩu không đúng" };
             return Redirect(loginModel?.ReturnUrl ?? "/");
         }
         public async Task<RedirectResult> Logout(string returnUrl = "/")
@@ -74,13 +74,16 @@ namespace AspNetCore.Controllers
             {
                 var n = await userManager.CreateAsync(user, user.PasswordHash);
                 if(n.Succeeded)
-                    TempData["Success"] = "Đã tạo tài khoản";
+                {
+                    await userManager.AddToRoleAsync(user, "user");
+                    TempData["Message"] = new[] {"success", "Đã tạo tài khoản" };
+                } 
                 else
-                    TempData["Error"] = "Lỗi tạo tài khoản, kiểm tra lại thông tin";
+                    TempData["Message"] = new[] {"danger", "Lỗi tạo tài khoản, kiểm tra lại thông tin" };
             }
             else
             {
-                TempData["Error"] = "Tài khoản đã tồn tại";
+                TempData["Message"] = new[] { "danger", "Tài khoản đã tồn tại" };
             }
             return Redirect("/");
         }

@@ -1,21 +1,9 @@
 ﻿@model ProductFormViewModel
 @{
     ViewData["Title"] = "Quản trị";
+    IEnumerable<Cat> Cat = (IEnumerable<Cat>)ViewBag.Cat;
 }
-<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
-<div class="c-layout-breadcrumbs-1 c-subtitle c-fonts-uppercase c-fonts-bold c-bordered c-bordered-both">
-    <div class="container">
-        <div class="c-page-title c-pull-left">
-            <h3 class="c-font-uppercase c-font-sbold">Quản trị</h3>
-        </div>
-        <ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
-            <li>
-                <a asp-action="Index" asp-controller="Admin">Quản trị</a>
-            </li>
-        </ul>
-    </div>
-</div>
-<!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-2 -->
+@Html.Partial("Header", "Quản trị")
 <div class="container">
     @Html.Partial("AdminMenuPartial")
     <div class="c-layout-sidebar-content ">
@@ -30,33 +18,33 @@
                 <div class="form-group">
                     <label asp-for="product.Name">Tên</label>
                     <div><span asp-validation-for="product.Name" class="text-danger"></span></div>
-                    <input asp-for="product.Name" class="form-control" />
+                    <input asp-for="product.Name" class="form-control c-square c-theme" />
                 </div>
                 <div class="form-group">
                     <label asp-for="product.Describe">Mô tả</label>
                     <div><span asp-validation-for="product.Describe" class="text-danger"></span></div>
-                    <textarea style="min-height:150px;" asp-for="product.Describe" class="form-control"></textarea>
+                    <textarea style="min-height:150px;" asp-for="product.Describe" class="form-control c-square c-theme"></textarea>
                 </div>
                 <div class="form-group">
                     <label asp-for="product.CatId">Loại</label>
                     <div><span asp-validation-for="product.CatId" class="text-danger"></span></div>
-                    <input asp-for="product.CatId" class="form-control" />
+                    <select asp-for="product.CatId" class="form-control c-square c-theme" asp-items="@(new SelectList(Cat,"Id","Name"))"></select>
                 </div>
                 <div class="form-group">
                     <label asp-for="product.Price">Giá</label>
                     <div><span asp-validation-for="product.Price" class="text-danger"></span></div>
-                    <input asp-for="product.Price" class="form-control" />
+                    <input asp-for="product.Price" class="form-control c-square c-theme" />
                 </div>
                 <div class="form-group">
                     <label asp-for="product.Quantity">Số lượng</label>
                     <div><span asp-validation-for="product.Quantity" class="text-danger"></span></div>
-                    <input asp-for="product.Quantity" class="form-control" />
+                    <input asp-for="product.Quantity" class="form-control c-square c-theme" />
                 </div>
                 <div class="form-group">
                     <div><label asp-for="product.Image">Ảnh</label></div>
                     <input asp-for="product.Image" type="hidden"/>
                     <div class="product-image-preview">
-                        <img class="product-image-preview" src="/@Model.product?.Image">
+                        <img class="product-image-preview" src="@Model.product?.Image">
                     </div>
                 </div>
                 <div class="form-group c-margin-t-10">
@@ -64,8 +52,8 @@
                     <input asp-for="img" type="file"/>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-primary" type="submit">Lưu</button>
-                    <a asp-action="Index" class="btn btn-default">Hủy</a>
+                    <button class="btn btn-lg c-btn-blue c-btn-square" type="submit">Lưu</button>
+                    <a asp-action="Index" class="btn btn-lg c-btn-dark c-btn-square c-btn-border-2x">Hủy</a>
                 </div>
             </form> 
         </div>
